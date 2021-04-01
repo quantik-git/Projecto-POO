@@ -1,5 +1,3 @@
-
-
 public class Jogo {
     int idJogo;
     Equipa casa;
