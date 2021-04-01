@@ -1,4 +1,4 @@
-package com.company;
+
 
 public class Jogo {
     int idJogo;
