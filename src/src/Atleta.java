@@ -1,9 +1,9 @@
 import java.util.Date;
 
 public class Atleta {
-    int idAtleta;
-    String nome;
-    Date data_de_nascimento;
+    private int idAtleta;
+    private String nome;
+    private Date data_de_nascimento;
 
     public int getIdAtleta() {
         return idAtleta;

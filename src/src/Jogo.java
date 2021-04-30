@@ -1,7 +1,7 @@
 public class Jogo {
-    int idJogo;
-    Equipa casa;
-    Equipa visitante;
+    private int idJogo;
+    private Equipa casa;
+    private Equipa visitante;
 
     public Jogo(Equipa casa, Equipa visitante) {
         this.casa = casa;
