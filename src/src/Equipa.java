@@ -107,4 +107,17 @@ public class Equipa {
             this.suplentes.add(suplente);
         }
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("IdEquipa: ").append(this.idEquipa + "\n");
+        sb.append("Nome: ").append(this.nome + "\n");
+        sb.append("DataDeFundacao: ").append(this.data_de_fundacao + "\n");
+        sb.append("Plantel: ").append(this.plantel + "\n");
+        sb.append("Titulares: ").append(this.titulares + "\n");
+        sb.append("Suplentes: ").append(this.suplentes + "\n");
+
+        return sb.toString();
+    }
 }

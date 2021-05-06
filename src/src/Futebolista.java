@@ -118,4 +118,19 @@ public abstract class Futebolista extends Atleta{
     public abstract Futebolista clone();
 
     public abstract int getOverall();
+
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("Velocidade: ").append(this.velocidade + "\n");
+        sb.append("Resistencia: ").append(this.resistencia + "\n");
+        sb.append("Destreza: ").append(this.destreza + "\n");
+        sb.append("Impulsao: ").append(this.impulsao + "\n");
+        sb.append("Cabeceamento: ").append(this.cabeceamento + "\n");
+        sb.append("Remate: ").append(this.remate + "\n");
+        sb.append("Passe: ").append(this.passe + "\n");
+        sb.append("Historial: ").append(this.historial + "\n");
+
+        return sb.toString();
+    }
 }
