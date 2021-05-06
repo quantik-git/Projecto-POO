@@ -27,6 +27,8 @@ public class GuardaRedes extends Futebolista {
     }
 
     public int getOverall() {
-        return this.elasticidade;
+        int overall = (int) (0.2*this.getDestreza() + 0.18*this.getImpulsao() + 0.16*this.getPasse() + 0.14*this.getRemate() + 0.12*this.getResistencia() + 0.10*this.getCabeceamento() + 0.10*this.getVelocidade());
+        
+        return (int) (overall*0.80 + this.getElasticidade()*0.20);
     }
 }
