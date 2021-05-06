@@ -5,6 +5,18 @@ public class Atleta {
     private String nome;
     private Date data_de_nascimento;
 
+    public Atleta(int idAtleta, String nome, Date data_de_nascimento) {
+        this.idAtleta = idAtleta;
+        this.nome = nome;
+        this.data_de_nascimento = data_de_nascimento;
+    }
+
+    public Atleta(Atleta atleta) {
+        this.idAtleta = atleta.getIdAtleta();
+        this.nome =atleta.getNome();
+        this.data_de_nascimento = atleta.getData_de_nascimento();
+    }
+
     public int getIdAtleta() {
         return idAtleta;
     }
