@@ -2,7 +2,6 @@ import java.util.Date;
 import java.util.Map;
 
 public class Avancado extends Futebolista {
-
     private int drible;
 
     public Avancado(int idAtleta, String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int drible) {
@@ -30,6 +29,4 @@ public class Avancado extends Futebolista {
     public int getOverall() {
         return this.drible;
     }
-
-
 }
