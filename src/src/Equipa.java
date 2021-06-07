@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Habilidade global em falta
@@ -10,11 +11,11 @@ public class Equipa {
     private int idEquipa;
     private String nome;
     private Date data_de_fundacao;
-    private List<Futebolista> plantel; // composição
+    private Map<Integer, Futebolista> plantel; // Numero da camisola, Jogador
     private List<Futebolista> titulares;
     private List<Futebolista> suplentes;
 
-    public Equipa(int idEquipa, String nome, Date data_de_fundacao, List<Futebolista> plantel, List<Futebolista> titulares, List<Futebolista> suplentes) {
+    public Equipa(int idEquipa, String nome, Date data_de_fundacao, Map<Integer, Futebolista> plantel, List<Futebolista> titulares, List<Futebolista> suplentes) {
         this.idEquipa = idEquipa;
         this.nome = nome;
         this.data_de_fundacao = data_de_fundacao;
@@ -60,16 +61,16 @@ public class Equipa {
         this.data_de_fundacao = data_de_fundacao;
     }
 
-    public List<Futebolista> getPlantel() {
+    public Map<Integer, Futebolista> getPlantel() {
         return plantel;
     }
 
-    public void setPlantel(List<Futebolista> plantel) {
+    public void setPlantel(Map<Integer, Futebolista> plantel) {
         plantel.forEach(this::addPlantel);
     }
 
-    public void addPlantel(Futebolista futebolista) {
-        this.plantel.add(futebolista.clone());
+    public void addPlantel(Integer numero, Futebolista futebolista) {
+        this.plantel.put(numero, futebolista.clone());
     }
 
     public List<Futebolista> getTitulares() {
@@ -81,7 +82,7 @@ public class Equipa {
     }
 
     /**
-     * Decidir se vamos return boolean para sinalizar se foi possível adicionar o jogador
+     * Decidir se vamos Throw Exception para sinalizar se foi possível adicionar o jogador
      * @param futebolista
      */
     public void addTitular(Futebolista futebolista) {
@@ -90,8 +91,8 @@ public class Equipa {
         }
     }
 
-    public void replaceTitular(int index, Futebolista futebolista) {
-        this.plantel.set(index, futebolista);
+    public void replaceTitular(int numero, Futebolista futebolista) {
+        this.plantel.replace(numero, futebolista);
     }
 
     public List<Futebolista> getSuplentes() {
