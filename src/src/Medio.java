@@ -32,7 +32,7 @@ public class Medio extends Futebolista {
 
     public static Medio parse(String input){
         String[] campos = input.split(",");
-        return new Medio(campos[0], Integer.parseInt(campos[1]),
+        return new Medio(campos[0],
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
                 Integer.parseInt(campos[4]),

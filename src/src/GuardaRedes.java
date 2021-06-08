@@ -34,7 +34,7 @@ public class GuardaRedes extends Futebolista {
 
     public static GuardaRedes parse(String input){
         String[] campos = input.split(",");
-        return new GuardaRedes(campos[0], Integer.parseInt(campos[1]),
+        return new GuardaRedes(campos[0],
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
                 Integer.parseInt(campos[4]),
