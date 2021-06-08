@@ -1,6 +1,4 @@
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Habilidade global em falta
@@ -24,12 +22,25 @@ public class Equipa {
         this.suplentes = suplentes;
     }
 
+    public Equipa(String nome, Date data_de_fundacao) {
+        this.nome = nome;
+        this.data_de_fundacao = data_de_fundacao;
+        this.plantel = new HashMap<>();
+        this.titulares = new ArrayList<>();
+        this.suplentes = new ArrayList<>();
+    }
+
     public Equipa(Equipa equipa) {
         this.nome = equipa.getNome();
         this.data_de_fundacao = equipa.getData_de_fundacao();
         this.plantel = equipa.getPlantel();
         this.titulares = equipa.getTitulares();
         this.suplentes = equipa.getSuplentes();
+    }
+
+    public static Equipa parse(String s) {
+        Date data = new Date();
+        return new Equipa(s, data);
     }
 
     public Equipa clone() {
