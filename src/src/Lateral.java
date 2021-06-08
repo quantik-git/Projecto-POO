@@ -31,4 +31,16 @@ public class Lateral extends Futebolista{
     public int getOverall() {
         return 0;
     }
+
+    public static Lateral parse(String input){
+        String[] campos = input.split(",");
+        return new Lateral(campos[0], Integer.parseInt(campos[1]),
+                Integer.parseInt(campos[2]),
+                Integer.parseInt(campos[3]),
+                Integer.parseInt(campos[4]),
+                Integer.parseInt(campos[5]),
+                Integer.parseInt(campos[6]),
+                Integer.parseInt(campos[7]),
+                Integer.parseInt(campos[8]));
+    }
 }
