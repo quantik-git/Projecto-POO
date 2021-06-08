@@ -6,17 +6,17 @@ import java.util.Map;
  * Habilidade global em falta
  */
 public class Equipa {
-    private static final int MAX_TITULARES = 11;
-    private static final int MAX_SUPLENTES = 11;
-    private int idEquipa;
+    private static final int NUM_TITULARES = 11;
+    private static final int MAX_SUPLENTES = 12;
+    private static final int MIN_SUPLENTES = 3;
+    //private int idEquipa;
     private String nome;
     private Date data_de_fundacao;
-    private Map<Integer, Futebolista> plantel; // Numero da camisola, Jogador
+    private Map<Integer, Futebolista> plantel; //Numero da camisola, Jogador
     private List<Futebolista> titulares;
     private List<Futebolista> suplentes;
 
-    public Equipa(int idEquipa, String nome, Date data_de_fundacao, Map<Integer, Futebolista> plantel, List<Futebolista> titulares, List<Futebolista> suplentes) {
-        this.idEquipa = idEquipa;
+    public Equipa(String nome, Date data_de_fundacao, Map<Integer, Futebolista> plantel, List<Futebolista> titulares, List<Futebolista> suplentes) {
         this.nome = nome;
         this.data_de_fundacao = data_de_fundacao;
         this.plantel = plantel;
@@ -25,7 +25,6 @@ public class Equipa {
     }
 
     public Equipa(Equipa equipa) {
-        this.idEquipa = equipa.getIdEquipa();
         this.nome = equipa.getNome();
         this.data_de_fundacao = equipa.getData_de_fundacao();
         this.plantel = equipa.getPlantel();
@@ -35,14 +34,6 @@ public class Equipa {
 
     public Equipa clone() {
         return new Equipa(this);
-    }
-
-    public int getIdEquipa() {
-        return idEquipa;
-    }
-
-    public void setIdEquipa(int idEquipa) {
-        this.idEquipa = idEquipa;
     }
 
     public String getNome() {
@@ -86,7 +77,7 @@ public class Equipa {
      * @param futebolista
      */
     public void addTitular(Futebolista futebolista) {
-        if (this.titulares.size() < MAX_TITULARES) {
+        if (this.titulares.size() < NUM_TITULARES) {
             this.titulares.add(futebolista);
         }
     }
@@ -112,7 +103,6 @@ public class Equipa {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("IdEquipa: ").append(this.idEquipa + "\n");
         sb.append("Nome: ").append(this.nome + "\n");
         sb.append("DataDeFundacao: ").append(this.data_de_fundacao + "\n");
         sb.append("Plantel: ").append(this.plantel + "\n");
