@@ -2,7 +2,6 @@ import java.util.Date;
 import java.util.Map;
 
 public class Defesa extends Futebolista {
-
     private int roubo_de_bola;
 
     public Defesa(int idAtleta, String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int roubo_de_bola) {
