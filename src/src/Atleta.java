@@ -1,28 +1,18 @@
 import java.util.Date;
 
 public class Atleta {
-    private int idAtleta;
+    //private int idAtleta;
     private String nome;
     private Date data_de_nascimento;
 
-    public Atleta(int idAtleta, String nome, Date data_de_nascimento) {
-        this.idAtleta = idAtleta;
+    public Atleta(String nome, Date data_de_nascimento) {
         this.nome = nome;
         this.data_de_nascimento = data_de_nascimento;
     }
 
     public Atleta(Atleta atleta) {
-        this.idAtleta = atleta.getIdAtleta();
         this.nome =atleta.getNome();
         this.data_de_nascimento = atleta.getData_de_nascimento();
-    }
-
-    public int getIdAtleta() {
-        return idAtleta;
-    }
-
-    public void setIdAtleta(int idAtleta) {
-        this.idAtleta = idAtleta;
     }
 
     public String getNome() {
