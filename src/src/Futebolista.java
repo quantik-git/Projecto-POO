@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,8 +16,8 @@ public abstract class Futebolista extends Atleta{
     private int passe;
     private Map<Integer, Equipa> historial; // lista de id's de equipas, Possibilidade de mover para o atleta para uma maior abstração
 
-    public Futebolista(int idAtleta, String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial) {
-        super(idAtleta, nome, data_de_nascimento);
+    public Futebolista(String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial) {
+        super(nome, data_de_nascimento);
         this.velocidade = velocidade;
         this.resistencia = resistencia;
         this.destreza = destreza;
@@ -25,6 +26,18 @@ public abstract class Futebolista extends Atleta{
         this.remate = remate;
         this.passe = passe;
         this.historial = historial;
+    }
+
+    public Futebolista(String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe) {
+        super(nome, data_de_nascimento);
+        this.velocidade = velocidade;
+        this.resistencia = resistencia;
+        this.destreza = destreza;
+        this.impulsao = impulsao;
+        this.cabeceamento = cabeceamento;
+        this.remate = remate;
+        this.passe = passe;
+        this.historial = new HashMap<Integer, Equipa>();
     }
 
     public Futebolista(Atleta atleta, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial) {
@@ -40,7 +53,7 @@ public abstract class Futebolista extends Atleta{
     }
 
     public Futebolista(Futebolista f) {
-        super(f.getIdAtleta(), f.getNome(), f.getData_de_nascimento());
+        super(f.getNome(), f.getData_de_nascimento());
         this.velocidade = f.getVelocidade();
         this.resistencia = f.getResistencia();
         this.destreza = f.getDestreza();
