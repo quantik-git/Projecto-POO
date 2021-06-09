@@ -1,11 +1,12 @@
 package Models;
 
 import java.util.Map;
+import java.util.List;
 
 public class Defesa extends Futebolista {
     private int roubo_de_bola;
 
-    public Defesa(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int roubo_de_bola) {
+    public Defesa(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int roubo_de_bola) {
         super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.roubo_de_bola = roubo_de_bola;
     }
@@ -34,6 +35,14 @@ public class Defesa extends Futebolista {
 
     public int getOverall() {
         return this.roubo_de_bola;
+    }
+
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("Roubo de bola: ").append(this.roubo_de_bola + "\n");
+
+        return super.toString() + sb.toString();
     }
 
     public static Defesa parse(String input){
