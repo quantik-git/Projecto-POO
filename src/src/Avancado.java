@@ -1,8 +1,14 @@
 import java.util.Date;
 import java.util.Map;
+import java.util.List;
 
 public class Avancado extends Futebolista {
     private int drible;
+
+    public Avancado(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int drible) {
+        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+        this.drible = drible;
+    }
 
     public Avancado(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int drible) {
         super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
@@ -30,9 +36,17 @@ public class Avancado extends Futebolista {
         return this.drible;
     }
 
-    public static Avancado parse(String input){
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("Drible: ").append(this.drible + "\n");
+
+        return super.toString() + sb.toString();
+    }
+
+    public static Avancado parse(String input) {
         String[] campos = input.split(",");
-        
+
         return new Avancado(campos[0],
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),

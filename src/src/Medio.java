@@ -1,10 +1,10 @@
 import java.util.Date;
 import java.util.Map;
-
+import java.util.List;
 public class Medio extends Futebolista {
     private int recuperacao;
 
-    public Medio(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int recuperacao) {
+    public Medio(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int recuperacao) {
         super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.recuperacao = recuperacao;
     }
@@ -33,6 +33,14 @@ public class Medio extends Futebolista {
 
     public int getOverall() {
         return this.recuperacao;
+    }
+
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("Recuperacao: ").append(this.recuperacao + "\n");
+
+        return super.toString() + sb.toString();
     }
 
     public static Medio parse(String input){

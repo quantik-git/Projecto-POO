@@ -1,10 +1,10 @@
 import java.util.Date;
 import java.util.Map;
-
+import java.util.List;
 public class Lateral extends Futebolista{
     private int cruzamento;
 
-    public Lateral(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int cruzamento) {
+    public Lateral(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int cruzamento) {
         super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.cruzamento = cruzamento;
     }
@@ -35,6 +35,14 @@ public class Lateral extends Futebolista{
     @Override
     public int getOverall() {
         return 0;
+    }
+
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("Cruzamento: ").append(this.cruzamento + "\n");
+
+        return super.toString() + sb.toString();
     }
 
     public static Lateral parse(String input){
