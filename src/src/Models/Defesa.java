@@ -1,6 +1,5 @@
 package Models;
 
-import java.util.Date;
 import java.util.Map;
 
 public class Defesa extends Futebolista {

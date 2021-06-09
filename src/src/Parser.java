@@ -1,8 +1,10 @@
 import Models.*;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,10 +14,15 @@ import java.util.Map;
 public class Parser {
 
     public static void parse() throws LinhaIncorretaException {
-        List<String> linhas = lerFicheiro("output.txt");
+        Mundo mundo = Mundo.getInstance();
+        boolean debug = false;
+        String ficheiro = "inicializacao.txt";
+
+        List<String> linhas = lerFicheiro(ficheiro);
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
-        List<Futebolista> futebolistas = new ArrayList<>(); //Models.Futebolista
+        List<Futebolista> futebolistas = new ArrayList<>(); //Futebolista
         List<Jogo> jogos = new ArrayList<>();
+
         Equipa ultima = null;
         Futebolista f = null;
         String[] linhaPartida;
@@ -26,7 +33,7 @@ public class Parser {
             campos = linhaPartida[1].split(",");
 
             switch(linhaPartida[0]) {
-                case "Models.Equipa":
+                case "Equipa":
                     Equipa e = Equipa.parse(linhaPartida[1]);
                     equipas.put(e.getNome(), e);
                     ultima = e;
@@ -37,31 +44,31 @@ public class Parser {
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Models.Defesa":
+                case "Defesa":
                     f = Defesa.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Models.Medio":
+                case "Medio":
                     f = Medio.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Models.Lateral":
+                case "Lateral":
                     f = Lateral.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Models.Avancado":
+                case "Avancado":
                     f = Avancado.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Models.Jogo":
+                case "Jogo":
                     Jogo j = Jogo.parse(linhaPartida[1]);
                     jogos.add(j);
                     break;
@@ -70,18 +77,25 @@ public class Parser {
             }
         }
 
-        // Debug
-        for (Equipa e: equipas.values()){
-            System.out.println(e.toString());
-        }
-        for (Jogo j: jogos){
-            System.out.println(j.toString());
+        mundo.setFutebolistas(futebolistas);
+        mundo.setEquipas(equipas);
+
+        if (debug) {
+            for (Equipa e: equipas.values()){
+                System.out.println(e.toString());
+            }
+            for (Futebolista futebolista : futebolistas) {
+                System.out.println(futebolista.toString());
+            }
+            for (Jogo j: jogos){
+                System.out.println(j.toString());
+            }
         }
     }
 
     public static List<String> lerFicheiro(String nomeFich) {
         List<String> lines;
-        try { lines = Files.readAllLines(Paths.get(nomeFich), StandardCharsets.UTF_8); }
+        try { lines = Files.readAllLines(Paths.get("./src/src/" + nomeFich), StandardCharsets.UTF_8); }
         catch(IOException exc) { lines = new ArrayList<>(); }
         return lines;
     }

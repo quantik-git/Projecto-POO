@@ -8,13 +8,15 @@ public class Mundo {
     private static Mundo instance = new Mundo();
 
     private Map<String, Equipa> equipas;
-    private Map<String, Futebolista> futebolistas;
+    private List<Futebolista> futebolistas;
     private List<Jogo> jogos;
+    private String equipaEscolhida;
 
     private Mundo() {
         this.equipas = new HashMap<>();
-        this.futebolistas = new HashMap<>();
+        this.futebolistas = new ArrayList<>();
         this.jogos = new ArrayList<>();
+        this.equipaEscolhida = "";
     }
 
     public Map<String, Equipa> getEquipas() {
@@ -25,11 +27,11 @@ public class Mundo {
         this.equipas = equipas;
     }
 
-    public Map<String, Futebolista> getFutebolistas() {
+    public List<Futebolista> getFutebolistas() {
         return futebolistas;
     }
 
-    public void setFutebolistas(Map<String, Futebolista> futebolistas) {
+    public void setFutebolistas(List<Futebolista> futebolistas) {
         this.futebolistas = futebolistas;
     }
 
@@ -39,6 +41,14 @@ public class Mundo {
 
     public void setJogos(List<Jogo> jogos) {
         this.jogos = jogos;
+    }
+
+    public String getEquipaEscolhida() {
+        return equipaEscolhida;
+    }
+
+    public void setEquipaEscolhida(String equipaEscolhida) {
+        this.equipaEscolhida = equipaEscolhida;
     }
 
     public static Mundo getInstance(){
