@@ -1,21 +1,23 @@
+package Models;
+
 import java.util.Date;
 import java.util.Map;
-
+import java.util.List;
 public class Medio extends Futebolista {
     private int recuperacao;
 
-    public Medio(String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int recuperacao) {
-        super(nome, data_de_nascimento, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+    public Medio(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int recuperacao) {
+        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.recuperacao = recuperacao;
     }
 
-    public Medio(String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int recuperacao) {
-        super(nome, data_de_nascimento, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
+    public Medio(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int recuperacao) {
+        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.recuperacao = recuperacao;
     }
 
     public Medio(Medio m) {
-        super(m.getNome(), m.getData_de_nascimento(), m.getVelocidade(), m.getResistencia(), m.getDestreza(), m.getImpulsao(), m.getCabeceamento(), m.getRemate(), m.getPasse(), m.getHistorial());
+        super(m.getNome(), m.getVelocidade(), m.getResistencia(), m.getDestreza(), m.getImpulsao(), m.getCabeceamento(), m.getRemate(), m.getPasse(), m.getHistorial());
         this.recuperacao = m.getRecuperacao();
     }
 
@@ -35,11 +37,18 @@ public class Medio extends Futebolista {
         return this.recuperacao;
     }
 
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("Recuperacao: ").append(this.recuperacao + "\n");
+
+        return super.toString() + sb.toString();
+    }
+
     public static Medio parse(String input){
         String[] campos = input.split(",");
-        Date data = new Date();
 
-        return new Medio(campos[0], data,
+        return new Medio(campos[0],
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
                 Integer.parseInt(campos[4]),

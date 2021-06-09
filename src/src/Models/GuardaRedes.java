@@ -1,16 +1,23 @@
+package Models;
+
 import java.util.Date;
 import java.util.Map;
-
+import java.util.List;
 public class GuardaRedes extends Futebolista {
     private int elasticidade;
 
-    public GuardaRedes(int idAtleta, String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int elasticidade) {
-        super(idAtleta, nome, data_de_nascimento, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+    public GuardaRedes(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int elasticidade) {
+        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+        this.elasticidade = elasticidade;
+    }
+
+    public GuardaRedes(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int elasticidade) {
+        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.elasticidade = elasticidade;
     }
 
     public GuardaRedes(GuardaRedes g) {
-        super(g.getIdAtleta(), g.getNome(), g.getData_de_nascimento(), g.getVelocidade(), g.getResistencia(), g.getDestreza(), g.getImpulsao(), g.getCabeceamento(), g.getRemate(),g.getPasse(),g.getHistorial());
+        super(g.getNome(), g.getVelocidade(), g.getResistencia(), g.getDestreza(), g.getImpulsao(), g.getCabeceamento(), g.getRemate(),g.getPasse(),g.getHistorial());
         this.elasticidade = g.getElasticidade();
     }
 
@@ -32,6 +39,14 @@ public class GuardaRedes extends Futebolista {
         return (int) (overall*0.80 + this.getElasticidade()*0.20);
     }
 
+    public String toString() {
+        StringBuilder sb= new StringBuilder();
+
+        sb.append("Elasticidade: ").append(this.elasticidade + "\n");
+
+        return super.toString() + sb.toString();
+    }
+
     public static GuardaRedes parse(String input){
         String[] campos = input.split(",");
         return new GuardaRedes(campos[0],
@@ -41,6 +56,7 @@ public class GuardaRedes extends Futebolista {
                 Integer.parseInt(campos[5]),
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
-                Integer.parseInt(campos[8]));
+                Integer.parseInt(campos[8]),
+                Integer.parseInt(campos[9]));
     }
 }
