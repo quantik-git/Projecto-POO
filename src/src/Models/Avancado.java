@@ -1,5 +1,6 @@
+package Models;
+
 import java.util.Date;
-import java.util.Map;
 
 public class Avancado extends Futebolista {
     private int drible;

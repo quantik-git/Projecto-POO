@@ -1,3 +1,5 @@
+import Models.*;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,7 +14,7 @@ public class Parser {
     public static void parse() throws LinhaIncorretaException {
         List<String> linhas = lerFicheiro("output.txt");
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
-        List<Futebolista> futebolistas = new ArrayList<>(); //Futebolista
+        List<Futebolista> futebolistas = new ArrayList<>(); //Models.Futebolista
         List<Jogo> jogos = new ArrayList<>();
         Equipa ultima = null;
         Futebolista f = null;
@@ -24,7 +26,7 @@ public class Parser {
             campos = linhaPartida[1].split(",");
 
             switch(linhaPartida[0]) {
-                case "Equipa":
+                case "Models.Equipa":
                     Equipa e = Equipa.parse(linhaPartida[1]);
                     equipas.put(e.getNome(), e);
                     ultima = e;
@@ -35,31 +37,31 @@ public class Parser {
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Defesa":
+                case "Models.Defesa":
                     f = Defesa.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Medio":
+                case "Models.Medio":
                     f = Medio.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Lateral":
+                case "Models.Lateral":
                     f = Lateral.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Avancado":
+                case "Models.Avancado":
                     f = Avancado.parse(linhaPartida[1]);
                     futebolistas.add(f);
                     if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(Integer.parseInt(campos[1]), f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-                case "Jogo":
+                case "Models.Jogo":
                     Jogo j = Jogo.parse(linhaPartida[1]);
                     jogos.add(j);
                     break;
