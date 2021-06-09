@@ -16,8 +16,8 @@ public abstract class Futebolista extends Atleta{
     private int passe;
     private Map<Integer, Equipa> historial; // lista de id's de equipas, Possibilidade de mover para o atleta para uma maior abstração
 
-    public Futebolista(String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial) {
-        super(nome, data_de_nascimento);
+    public Futebolista(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial) {
+        super(nome);
         this.velocidade = velocidade;
         this.resistencia = resistencia;
         this.destreza = destreza;
@@ -28,8 +28,8 @@ public abstract class Futebolista extends Atleta{
         this.historial = historial;
     }
 
-    public Futebolista(String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe) {
-        super(nome, data_de_nascimento);
+    public Futebolista(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe) {
+        super(nome);
         this.velocidade = velocidade;
         this.resistencia = resistencia;
         this.destreza = destreza;
@@ -53,7 +53,7 @@ public abstract class Futebolista extends Atleta{
     }
 
     public Futebolista(Futebolista f) {
-        super(f.getNome(), f.getData_de_nascimento());
+        super(f.getNome());
         this.velocidade = f.getVelocidade();
         this.resistencia = f.getResistencia();
         this.destreza = f.getDestreza();
