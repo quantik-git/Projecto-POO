@@ -9,13 +9,13 @@ public class Equipa {
     private static final int NUM_TITULARES = 11;
     private static final int MAX_SUPLENTES = 12;
     private static final int MIN_SUPLENTES = 3;
-    //private int idEquipa;
-    private String nome;
-    private Map<Integer, Futebolista> plantel; //Numero da camisola, Jogador
-    private List<Futebolista> titulares;
-    private List<Futebolista> suplentes;
 
-    public Equipa(String nome, Map<Integer, Futebolista> plantel, List<Futebolista> titulares, List<Futebolista> suplentes) {
+    private String nome;
+    private Map<String, Futebolista> plantel; // Nome, Jogador
+    private List<String> titulares;
+    private List<String> suplentes;
+
+    public Equipa(String nome, Map<String, Futebolista> plantel, List<String> titulares, List<String> suplentes) {
         this.nome = nome;
         this.plantel = plantel;
         this.titulares = titulares;
@@ -52,49 +52,49 @@ public class Equipa {
         this.nome = nome;
     }
 
-    public Map<Integer, Futebolista> getPlantel() {
+    public Map<String, Futebolista> getPlantel() {
         return plantel;
     }
 
-    public void setPlantel(Map<Integer, Futebolista> plantel) {
-        plantel.forEach(this::addPlantel);
+    public void setPlantel(Map<String, Futebolista> plantel) {
+        plantel.values().forEach(this::addPlantel);
     }
 
-    public void addPlantel(Integer numero, Futebolista futebolista) {
-        this.plantel.put(numero, futebolista.clone());
+    public void addPlantel(Futebolista futebolista) {
+        this.plantel.put(futebolista.getNome(), futebolista.clone());
     }
 
-    public List<Futebolista> getTitulares() {
+    public List<String> getTitulares() {
         return titulares;
     }
 
-    public void setTitulares(List<Futebolista> titulares) {
+    public void setTitulares(List<String> titulares) {
         titulares.forEach(this::addTitular);
     }
 
-    /**
-     * Decidir se vamos Throw Exception para sinalizar se foi possível adicionar o jogador
-     * @param futebolista
-     */
-    public void addTitular(Futebolista futebolista) {
+    //Decidir se vamos Throw Exception para sinalizar se foi possível adicionar o jogador TODO
+    public void addTitular(String nome) {
         if (this.titulares.size() < NUM_TITULARES) {
-            this.titulares.add(futebolista);
+            this.titulares.add(nome);
         }
     }
 
-    public void replaceTitular(int numero, Futebolista futebolista) {
-        this.plantel.replace(numero, futebolista);
+    public void replaceTitular(String antigo, String novo) {
+        if (this.titulares.contains(antigo)) {
+            this.titulares.remove(antigo);
+            this.titulares.add(novo);
+        }
     }
 
-    public List<Futebolista> getSuplentes() {
+    public List<String> getSuplentes() {
         return suplentes;
     }
 
-    public void setSuplentes(List<Futebolista> suplentes) {
+    public void setSuplentes(List<String> suplentes) {
         suplentes.forEach(this::addSuplente);
     }
 
-    public void addSuplente(Futebolista suplente) {
+    public void addSuplente(String suplente) {
         if (this.suplentes.size() < MAX_SUPLENTES) {
             this.suplentes.add(suplente);
         }

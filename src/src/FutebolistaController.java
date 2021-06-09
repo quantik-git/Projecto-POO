@@ -1,6 +1,21 @@
+import Models.*;
+
 import java.util.Scanner;
 
 public class FutebolistaController {
+    Mundo mundo = Mundo.getInstance();
+
+    public void index() {
+        for (Futebolista futebolista : mundo.getFutebolistas()) {
+            System.out.println(futebolista.getNome());
+        }
+    }
+
+    public void show(String nome) {
+        Futebolista escolhido = mundo.getFutebolista(nome);
+
+        System.out.println(escolhido.toString());
+    }
 
     public Futebolista create(){
         Scanner sc = new Scanner(System.in);
@@ -37,12 +52,14 @@ public class FutebolistaController {
         Futebolista jogador = null;
 
         switch (tipodejogador){
-            case 1: int elasticidade = GuardaRedesController.create();
-                    jogador = new GuardaRedes(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
-                    break;
-            case 2: int roubo_de_bola = DefesaController.create();
-                    jogador = new Defesa(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
-                    break;
+            case 1:
+                int elasticidade = GuardaRedesController.create();
+                jogador = new GuardaRedes(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
+                break;
+            case 2:
+                int roubo_de_bola = DefesaController.create();
+                jogador = new Defesa(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
+                break;
             case 3: int cruzamento = LateralController.create();
                     jogador = new Lateral(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, cruzamento);
                     break;
@@ -52,12 +69,11 @@ public class FutebolistaController {
             case 5: int drible = AvancadoController.create();
                     jogador = new Avancado(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, drible);
                     break;
-            default:System.out.println("Ups!");
-
+            default:
+                System.out.println("Ups!");
         }
 
         sc.close();
         return jogador;
-
     }
 }

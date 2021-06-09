@@ -23,12 +23,25 @@ public class Mundo {
         return equipas;
     }
 
+    public Equipa getEquipa(String nome) {
+        return this.equipas.get(nome);
+    }
+
     public void setEquipas(Map<String, Equipa> equipas) {
         this.equipas = equipas;
     }
 
     public List<Futebolista> getFutebolistas() {
         return futebolistas;
+    }
+
+    public Futebolista getFutebolista(String nome) {
+        for (Futebolista futebolista : futebolistas) {
+            if (futebolista.getNome().equals(nome)) {
+                return futebolista;
+            }
+        }
+        return null;
     }
 
     public void setFutebolistas(List<Futebolista> futebolistas) {

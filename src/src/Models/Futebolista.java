@@ -12,13 +12,7 @@ import java.util.ArrayList;
 
 public abstract class Futebolista {
     private String nome;
-    private int velocidade;
-    private int resistencia;
-    private int destreza;
-    private int impulsao;
-    private int cabeceamento;
-    private int remate;
-    private int passe;
+    private int velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe;
     private List<String> historial;
 
     public Futebolista(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial) {
@@ -137,7 +131,7 @@ public abstract class Futebolista {
     public abstract int getOverall();
 
     public String toString() {
-        StringBuilder sb= new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("Nome: ").append(this.nome + "\n");
         sb.append("Velocidade: ").append(this.velocidade + "\n");
