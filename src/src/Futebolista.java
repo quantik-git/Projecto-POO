@@ -1,6 +1,8 @@
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Habilidade
@@ -15,9 +17,9 @@ public abstract class Futebolista {
     private int cabeceamento;
     private int remate;
     private int passe;
-    private Map<Integer, Equipa> historial; // lista de id's de equipas, Possibilidade de mover para o atleta para uma maior abstração
+    private List<String> historial;
 
-    public Futebolista(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial) {
+    public Futebolista(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial) {
         this.nome = nome;
         this.velocidade = velocidade;
         this.resistencia = resistencia;
@@ -38,7 +40,7 @@ public abstract class Futebolista {
         this.cabeceamento = cabeceamento;
         this.remate = remate;
         this.passe = passe;
-        this.historial = new HashMap<Integer, Equipa>();
+        this.historial = new ArrayList<>();
     }
 
     public Futebolista(Futebolista f) {
@@ -116,12 +118,16 @@ public abstract class Futebolista {
         this.passe = passe;
     }
 
-    public Map<Integer, Equipa> getHistorial() {
+    public List<String> getHistorial() {
         return historial;
     }
 
-    public void setHistorial(Map<Integer, Equipa> historial) {
+    public void setHistorial(List<String> historial) {
         this.historial = historial;
+    }
+
+    public void addHistorial(String equipa) {
+        this.historial.add(equipa);
     }
 
     public abstract Futebolista clone();
