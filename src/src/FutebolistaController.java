@@ -34,6 +34,8 @@ public class FutebolistaController {
         }
         System.out.println("Insira o nome do jogador: ");
         String nome = sc.nextLine();
+        System.out.println("Insira o numero do jogador: ");
+        int numero = sc.nextInt();
         System.out.println("Insira a velocidade do jogador: ");
         int velocidade = sc.nextInt();
         System.out.println("Insira a resistencia do jogador: ");
@@ -54,20 +56,20 @@ public class FutebolistaController {
         switch (tipodejogador){
             case 1:
                 int elasticidade = GuardaRedesController.create();
-                jogador = new GuardaRedes(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
+                jogador = new GuardaRedes(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
                 break;
             case 2:
                 int roubo_de_bola = DefesaController.create();
-                jogador = new Defesa(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
+                jogador = new Defesa(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
                 break;
             case 3: int cruzamento = LateralController.create();
-                    jogador = new Lateral(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, cruzamento);
+                    jogador = new Lateral(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, cruzamento);
                     break;
             case 4: int recuperacao = MedioController.create();
-                    jogador = new Medio(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, recuperacao);
+                    jogador = new Medio(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, recuperacao);
                     break;
             case 5: int drible = AvancadoController.create();
-                    jogador = new Avancado(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, drible);
+                    jogador = new Avancado(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, drible);
                     break;
             default:
                 System.out.println("Ups!");

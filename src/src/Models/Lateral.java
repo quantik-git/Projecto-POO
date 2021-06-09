@@ -6,18 +6,18 @@ import java.util.List;
 public class Lateral extends Futebolista{
     private int cruzamento;
 
-    public Lateral(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int cruzamento) {
-        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+    public Lateral(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int cruzamento) {
+        super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.cruzamento = cruzamento;
     }
 
-    public Lateral(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int cruzamento) {
-        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
+    public Lateral(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int cruzamento) {
+        super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.cruzamento = cruzamento;
     }
 
     public Lateral(Lateral l) {
-        super(l.getNome(), l.getVelocidade(), l.getResistencia(), l.getDestreza(), l.getImpulsao(), l.getCabeceamento(), l.getRemate(), l.getPasse(), l.getHistorial());
+        super(l.getNome(), l.getNumero(), l.getVelocidade(), l.getResistencia(), l.getDestreza(), l.getImpulsao(), l.getCabeceamento(), l.getRemate(), l.getPasse(), l.getHistorial());
         this.cruzamento = l.getCruzamento();
     }
 
@@ -49,7 +49,7 @@ public class Lateral extends Futebolista{
 
     public static Lateral parse(String input){
         String[] campos = input.split(",");
-        return new Lateral(campos[0],
+        return new Lateral(campos[0], Integer.parseInt(campos[1]),
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
                 Integer.parseInt(campos[4]),

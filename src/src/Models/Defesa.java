@@ -6,18 +6,18 @@ import java.util.List;
 public class Defesa extends Futebolista {
     private int roubo_de_bola;
 
-    public Defesa(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int roubo_de_bola) {
-        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+    public Defesa(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int roubo_de_bola) {
+        super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.roubo_de_bola = roubo_de_bola;
     }
 
-    public Defesa(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int roubo_de_bola) {
-        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
+    public Defesa(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int roubo_de_bola) {
+        super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.roubo_de_bola = roubo_de_bola;
     }
 
     public Defesa(Defesa d) {
-        super(d.getNome(), d.getVelocidade(), d.getResistencia(), d.getDestreza(), d.getImpulsao(), d.getCabeceamento(), d.getRemate(), d.getPasse(), d.getHistorial());
+        super(d.getNome(), d.getNumero(), d.getVelocidade(), d.getResistencia(), d.getDestreza(), d.getImpulsao(), d.getCabeceamento(), d.getRemate(), d.getPasse(), d.getHistorial());
         this.roubo_de_bola = d.getRoubo_de_bola();
     }
 
@@ -48,7 +48,7 @@ public class Defesa extends Futebolista {
     public static Defesa parse(String input){
         String[] campos = input.split(",");
 
-        return new Defesa(campos[0],
+        return new Defesa(campos[0], Integer.parseInt(campos[1]),
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
                 Integer.parseInt(campos[4]),
