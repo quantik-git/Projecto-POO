@@ -11,22 +11,19 @@ public class Equipa {
     private static final int MIN_SUPLENTES = 3;
     //private int idEquipa;
     private String nome;
-    private Date data_de_fundacao;
     private Map<Integer, Futebolista> plantel; //Numero da camisola, Jogador
     private List<Futebolista> titulares;
     private List<Futebolista> suplentes;
 
-    public Equipa(String nome, Date data_de_fundacao, Map<Integer, Futebolista> plantel, List<Futebolista> titulares, List<Futebolista> suplentes) {
+    public Equipa(String nome, Map<Integer, Futebolista> plantel, List<Futebolista> titulares, List<Futebolista> suplentes) {
         this.nome = nome;
-        this.data_de_fundacao = data_de_fundacao;
         this.plantel = plantel;
         this.titulares = titulares;
         this.suplentes = suplentes;
     }
 
-    public Equipa(String nome, Date data_de_fundacao) {
+    public Equipa(String nome) {
         this.nome = nome;
-        this.data_de_fundacao = data_de_fundacao;
         this.plantel = new HashMap<>();
         this.titulares = new ArrayList<>();
         this.suplentes = new ArrayList<>();
@@ -34,15 +31,13 @@ public class Equipa {
 
     public Equipa(Equipa equipa) {
         this.nome = equipa.getNome();
-        this.data_de_fundacao = equipa.getData_de_fundacao();
         this.plantel = equipa.getPlantel();
         this.titulares = equipa.getTitulares();
         this.suplentes = equipa.getSuplentes();
     }
 
     public static Equipa parse(String s) {
-        Date data = new Date();
-        return new Equipa(s, data);
+        return new Equipa(s);
     }
 
     public Equipa clone() {
@@ -55,14 +50,6 @@ public class Equipa {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Date getData_de_fundacao() {
-        return data_de_fundacao;
-    }
-
-    public void setData_de_fundacao(Date data_de_fundacao) {
-        this.data_de_fundacao = data_de_fundacao;
     }
 
     public Map<Integer, Futebolista> getPlantel() {
@@ -117,7 +104,6 @@ public class Equipa {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Nome: ").append(this.nome + "\n");
-        sb.append("DataDeFundacao: ").append(this.data_de_fundacao + "\n");
         sb.append("Plantel: ").append(this.plantel + "\n");
         sb.append("Titulares: ").append(this.titulares + "\n");
         sb.append("Suplentes: ").append(this.suplentes + "\n");

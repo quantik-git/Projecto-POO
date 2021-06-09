@@ -6,13 +6,18 @@ import java.util.Map;
 public class GuardaRedes extends Futebolista {
     private int elasticidade;
 
-    public GuardaRedes(int idAtleta, String nome, Date data_de_nascimento, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int elasticidade) {
-        super(idAtleta, nome, data_de_nascimento, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+    public GuardaRedes(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, Map<Integer, Equipa> historial, int elasticidade) {
+        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
+        this.elasticidade = elasticidade;
+    }
+
+    public GuardaRedes(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int elasticidade) {
+        super(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.elasticidade = elasticidade;
     }
 
     public GuardaRedes(GuardaRedes g) {
-        super(g.getIdAtleta(), g.getNome(), g.getData_de_nascimento(), g.getVelocidade(), g.getResistencia(), g.getDestreza(), g.getImpulsao(), g.getCabeceamento(), g.getRemate(),g.getPasse(),g.getHistorial());
+        super(g.getNome(), g.getVelocidade(), g.getResistencia(), g.getDestreza(), g.getImpulsao(), g.getCabeceamento(), g.getRemate(),g.getPasse(),g.getHistorial());
         this.elasticidade = g.getElasticidade();
     }
 
@@ -43,6 +48,7 @@ public class GuardaRedes extends Futebolista {
                 Integer.parseInt(campos[5]),
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
-                Integer.parseInt(campos[8]));
+                Integer.parseInt(campos[8]),
+                Integer.parseInt(campos[9]));
     }
 }
