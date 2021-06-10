@@ -48,6 +48,17 @@ public class GuardaRedes extends Futebolista {
         return super.toString() + sb.toString();
     }
 
+    public String toStringNomeNum() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getNome() + " - ");
+        sb.append(this.getNumero() + "\t");
+        sb.append("Guarda-Redes\t");
+        sb.append(this.getOverall());
+
+        return sb.toString();
+    }
+
     public static GuardaRedes parse(String input){
         String[] campos = input.split(",");
         return new GuardaRedes(campos[0], Integer.parseInt(campos[1]),

@@ -47,6 +47,17 @@ public class Avancado extends Futebolista {
         return super.toString() + sb.toString();
     }
 
+    public String toStringNomeNum() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getNome() + " - ");
+        sb.append(this.getNumero() + "\t");
+        sb.append("Avancado\t");
+        sb.append(this.getOverall());
+
+        return sb.toString();
+    }
+
     public static Avancado parse(String input) {
         String[] campos = input.split(",");
 
