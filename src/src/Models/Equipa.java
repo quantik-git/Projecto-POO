@@ -1,14 +1,15 @@
 package Models;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Habilidade global em falta
  */
 public class Equipa {
-    private static final int NUM_TITULARES = 11;
-    private static final int MAX_SUPLENTES = 12;
-    private static final int MIN_SUPLENTES = 3;
+    public static final int NUM_TITULARES = 11;
+    public static final int MAX_SUPLENTES = 12;
+    public static final int MIN_SUPLENTES = 3;
 
     private String nome;
     private Map<String, Futebolista> plantel; // Nome, Jogador
@@ -61,7 +62,21 @@ public class Equipa {
     }
 
     public void addPlantel(Futebolista futebolista) {
-        this.plantel.put(futebolista.getNome(), futebolista.clone());
+        Futebolista novo = futebolista.clone();
+        novo.addHistorial(this.nome);
+        this.plantel.put(futebolista.getNome(), novo);
+    }
+
+    public void removePlantel(String nome) {
+        this.plantel.remove(nome);
+
+        this.setTitulares(
+                this.getTitulares().stream().filter(fut -> !fut.equals(nome)).collect(Collectors.toList())
+        );
+
+        this.setSuplentes(
+                this.getSuplentes().stream().filter(fut -> !fut.equals(nome)).collect(Collectors.toList())
+        );
     }
 
     public List<String> getTitulares() {

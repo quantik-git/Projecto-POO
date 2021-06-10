@@ -1,10 +1,8 @@
 import Models.*;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +11,10 @@ import java.util.Map;
 
 public class Parser {
 
-    public static void parse() throws LinhaIncorretaException {
+    public static void parse() throws IOException {
         Mundo mundo = Mundo.getInstance();
         boolean debug = false;
-        String ficheiro = "inicializacao.txt";
+        String ficheiro = "./src/configs/inicializacao.txt";
 
         List<String> linhas = lerFicheiro(ficheiro);
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
@@ -30,7 +28,7 @@ public class Parser {
         for (String linha : linhas) {
             linhaPartida = linha.split(":", 2);
 
-            switch(linhaPartida[0]) {
+            switch (linhaPartida[0]) {
                 case "Equipa":
                     Equipa e = Equipa.parse(linhaPartida[1]);
                     equipas.put(e.getNome(), e);
@@ -39,31 +37,31 @@ public class Parser {
                 case "Guarda-Redes":
                     f = GuardaRedes.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Defesa":
                     f = Defesa.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Medio":
                     f = Medio.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Lateral":
                     f = Lateral.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Avancado":
                     f = Avancado.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
+                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Jogo":
@@ -71,7 +69,7 @@ public class Parser {
                     jogos.add(j);
                     break;
                 default:
-                    throw new LinhaIncorretaException();
+                    throw new IOException();
             }
         }
 
@@ -93,7 +91,7 @@ public class Parser {
 
     public static List<String> lerFicheiro(String nomeFich) {
         List<String> lines;
-        try { lines = Files.readAllLines(Paths.get("./src/src/" + nomeFich), StandardCharsets.UTF_8); }
+        try { lines = Files.readAllLines(Paths.get(nomeFich), StandardCharsets.UTF_8); }
         catch(IOException exc) { lines = new ArrayList<>(); }
         return lines;
     }

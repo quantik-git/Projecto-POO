@@ -7,7 +7,6 @@ public class DefesaController {
         System.out.println("Insira o roubo de bola do jogador: ");
         int roubo_de_bola = sc.nextInt();
 
-        sc.close();
         return roubo_de_bola;
     }
 

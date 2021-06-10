@@ -1,13 +1,11 @@
 import Models.*;
 
-import java.util.Scanner;
-
 public class FutebolistaController {
-    Mundo mundo = Mundo.getInstance();
+    private static Mundo mundo = Mundo.getInstance();
 
     public void index() {
         for (Futebolista futebolista : mundo.getFutebolistas()) {
-            System.out.println(futebolista.getNome());
+            show(futebolista.getNome());
         }
     }
 
@@ -17,41 +15,34 @@ public class FutebolistaController {
         System.out.println(escolhido.toString());
     }
 
-    public Futebolista create(){
-        Scanner sc = new Scanner(System.in);
+    public static void show(Futebolista escolhido) {
+        System.out.println(escolhido.toString());
+    }
 
-        System.out.println("Que tipo de jogador pretende criar?\n" +
-                           "1) Guarda-Redes\n" +
-                           "2) Defesa\n" +
-                           "3) Lateral\n" +
-                           "4) Medio\n" +
-                           "5) Avancado");
-        int tipodejogador = sc.nextInt();
+    public static void create(){
+        // TODO menu tem opção de sair que não devia ser possivel
+        String[] options = {
+                "Guarda-Redes",
+                "Defesa",
+                "Lateral",
+                "Medio",
+                "Avançado"
+        };
 
-        while (tipodejogador > 5 || tipodejogador < 0){
-            System.out.println("Jogador inválido, insira novamente: ");
-            tipodejogador = sc.nextInt();
-        }
-        System.out.println("Insira o nome do jogador: ");
-        String nome = sc.nextLine();
-        System.out.println("Insira a velocidade do jogador: ");
-        int velocidade = sc.nextInt();
-        System.out.println("Insira a resistencia do jogador: ");
-        int resistencia = sc.nextInt();
-        System.out.println("Insira a destreza do jogador: ");
-        int destreza = sc.nextInt();
-        System.out.println("Insira a impulsao do jogador: ");
-        int impulsao = sc.nextInt();
-        System.out.println("Insira o cabeceamento do jogador: ");
-        int cabeceamento = sc.nextInt();
-        System.out.println("Insira o remate do jogador: ");
-        int remate = sc.nextInt();
-        System.out.println("Insira o passe do jogador: ");
-        int passe = sc.nextInt();
+        int tipodejogador = Menu.gerar(options);
+
+        String nome = Form.inputLine("Insira o nome do jogador: ");
+        int velocidade = Form.inputInt("Insira a velocidade do jogador: ", 0, 100);
+        int resistencia = Form.inputInt("Insira a resistencia do jogador: ", 0, 100);
+        int destreza =  Form.inputInt("Insira a destreza do jogador: ", 0, 100);
+        int impulsao =  Form.inputInt("Insira a impulsao do jogador: ", 0, 100);
+        int cabeceamento = Form.inputInt("Insira o cabeceamento do jogador: ", 0, 100);
+        int remate = Form.inputInt("Insira o remate do jogador: ", 0, 100);
+        int passe = Form.inputInt("Insira o passe do jogador: ", 0, 100);
 
         Futebolista jogador = null;
 
-        switch (tipodejogador){
+        switch (tipodejogador) {
             case 1:
                 int elasticidade = GuardaRedesController.create();
                 jogador = new GuardaRedes(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
@@ -60,20 +51,22 @@ public class FutebolistaController {
                 int roubo_de_bola = DefesaController.create();
                 jogador = new Defesa(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
                 break;
-            case 3: int cruzamento = LateralController.create();
-                    jogador = new Lateral(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, cruzamento);
-                    break;
-            case 4: int recuperacao = MedioController.create();
-                    jogador = new Medio(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, recuperacao);
-                    break;
-            case 5: int drible = AvancadoController.create();
-                    jogador = new Avancado(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, drible);
-                    break;
-            default:
-                System.out.println("Ups!");
+            case 3:
+                int cruzamento = LateralController.create();
+                jogador = new Lateral(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, cruzamento);
+                break;
+            case 4:
+                int recuperacao = MedioController.create();
+                jogador = new Medio(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, recuperacao);
+                break;
+            case 5:
+                int drible = AvancadoController.create();
+                jogador = new Avancado(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, drible);
+                break;
         }
 
-        sc.close();
-        return jogador;
+        show(jogador);
+
+        mundo.addFutebolista(jogador);
     }
 }

@@ -37,7 +37,7 @@ public class Avancado extends Futebolista {
     }
 
     public String toString() {
-        StringBuilder sb= new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         sb.append("Drible: ").append(this.drible + "\n");
 

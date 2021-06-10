@@ -7,7 +7,6 @@ public class MedioController {
         System.out.println("Insira a recuperacao do jogador: ");
         int recuperacao = sc.nextInt();
 
-        sc.close();
         return recuperacao;
     }
 }

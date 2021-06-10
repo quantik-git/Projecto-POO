@@ -7,7 +7,6 @@ public class AvancadoController {
         System.out.println("Insira o drible do jogador: ");
         int drible = sc.nextInt();
 
-        sc.close();
         return drible;
     }
 }

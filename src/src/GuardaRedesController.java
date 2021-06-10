@@ -5,10 +5,7 @@ public class GuardaRedesController {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Insira a elasticidade do jogador: ");
-        int elasticidade = sc.nextInt();
-
-        sc.close();
-        return elasticidade;
+        return sc.nextInt();
     }
 
 }

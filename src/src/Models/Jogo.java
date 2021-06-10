@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Jogo {
-    //private int idJogo;
     private String casa;
     private String visitante;
     private int golosCasa;
@@ -28,6 +27,78 @@ public class Jogo {
         this.jogadoresCasa = jogadoresCasa;
         this.jogadoresVisitante = jogadoresVisitante;
         this.substituicoesCasa = substituicoesCasa;
+        this.substitucoesVisitante = substitucoesVisitante;
+    }
+
+    public String getCasa() {
+        return casa;
+    }
+
+    public void setCasa(String casa) {
+        this.casa = casa;
+    }
+
+    public String getVisitante() {
+        return visitante;
+    }
+
+    public void setVisitante(String visitante) {
+        this.visitante = visitante;
+    }
+
+    public int getGolosCasa() {
+        return golosCasa;
+    }
+
+    public void setGolosCasa(int golosCasa) {
+        this.golosCasa = golosCasa;
+    }
+
+    public int getGolosVisitante() {
+        return golosVisitante;
+    }
+
+    public void setGolosVisitante(int golosVisitante) {
+        this.golosVisitante = golosVisitante;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public List<Integer> getJogadoresCasa() {
+        return jogadoresCasa;
+    }
+
+    public void setJogadoresCasa(List<Integer> jogadoresCasa) {
+        this.jogadoresCasa = jogadoresCasa;
+    }
+
+    public List<Integer> getJogadoresVisitante() {
+        return jogadoresVisitante;
+    }
+
+    public void setJogadoresVisitante(List<Integer> jogadoresVisitante) {
+        this.jogadoresVisitante = jogadoresVisitante;
+    }
+
+    public Map<Integer, Integer> getSubstituicoesCasa() {
+        return substituicoesCasa;
+    }
+
+    public void setSubstituicoesCasa(Map<Integer, Integer> substituicoesCasa) {
+        this.substituicoesCasa = substituicoesCasa;
+    }
+
+    public Map<Integer, Integer> getSubstitucoesVisitante() {
+        return substitucoesVisitante;
+    }
+
+    public void setSubstitucoesVisitante(Map<Integer, Integer> substitucoesVisitante) {
         this.substitucoesVisitante = substitucoesVisitante;
     }
 

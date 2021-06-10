@@ -48,6 +48,10 @@ public class Mundo {
         this.futebolistas = futebolistas;
     }
 
+    public void addFutebolista(Futebolista futebolista) {
+        this.futebolistas.add(futebolista);
+    }
+
     public List<Jogo> getJogos() {
         return jogos;
     }
