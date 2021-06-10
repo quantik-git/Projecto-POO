@@ -44,6 +44,7 @@ public class Lateral extends Futebolista{
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
+        sb.append("Posicao: Lateral\n");
         sb.append("Cruzamento: ").append(this.cruzamento + "\n");
         sb.append("Overall: ").append(this.getOverall() + "\n");
 

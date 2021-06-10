@@ -42,6 +42,7 @@ public class Defesa extends Futebolista {
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
+        sb.append("Posicao: Defesa\n");
         sb.append("Roubo de bola: ").append(this.roubo_de_bola + "\n");
         sb.append("Overall: ").append(this.getOverall() + "\n");
 

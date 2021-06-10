@@ -41,6 +41,7 @@ public class Avancado extends Futebolista {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
+        sb.append("Posicao: Avancado\n");
         sb.append("Drible: ").append(this.drible + "\n");
         sb.append("Overall: ").append(this.getOverall() + "\n");
 

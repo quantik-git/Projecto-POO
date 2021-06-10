@@ -42,6 +42,7 @@ public class Medio extends Futebolista {
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
+        sb.append("Posicao: Medio\n");
         sb.append("Recuperacao: ").append(this.recuperacao + "\n");
         sb.append("Overall: ").append(this.getOverall() + "\n");
 
