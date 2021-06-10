@@ -34,13 +34,16 @@ public class Medio extends Futebolista {
     }
 
     public int getOverall() {
-        return this.recuperacao;
+        int overall = (int) (0.2*this.getPasse() + 0.18*this.getDestreza() + 0.16*this.getResistencia() + 0.14*this.getImpulsao() + 0.12*this.getRemate() + 0.10*this.getVelocidade() + 0.10*this.getCabeceamento());
+
+        return (int) (overall*0.80 + this.getRecuperacao()*0.20);
     }
 
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
         sb.append("Recuperacao: ").append(this.recuperacao + "\n");
+        sb.append("Overall: ").append(this.getOverall() + "\n");
 
         return super.toString() + sb.toString();
     }

@@ -34,13 +34,16 @@ public class Defesa extends Futebolista {
     }
 
     public int getOverall() {
-        return this.roubo_de_bola;
+        int overall = (int) (0.2*this.getCabeceamento() + 0.18*this.getPasse() + 0.16*this.getDestreza() + 0.14*this.getResistencia() + 0.12*this.getRemate() + 0.10*this.getVelocidade() + 0.10*this.getImpulsao());
+
+        return (int) (overall*0.80 + this.getRoubo_de_bola()*0.20);
     }
 
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
         sb.append("Roubo de bola: ").append(this.roubo_de_bola + "\n");
+        sb.append("Overall: ").append(this.getOverall() + "\n");
 
         return super.toString() + sb.toString();
     }

@@ -36,13 +36,16 @@ public class Lateral extends Futebolista{
 
     @Override
     public int getOverall() {
-        return 0;
+        int overall = (int) (0.2*this.getVelocidade() + 0.18*this.getPasse() + 0.16*this.getImpulsao() + 0.14*this.getDestreza() + 0.12*this.getResistencia() + 0.10*this.getRemate() + 0.10*this.getCabeceamento());
+
+        return (int) (overall*0.80 + this.getCruzamento()*0.20);
     }
 
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
         sb.append("Cruzamento: ").append(this.cruzamento + "\n");
+        sb.append("Overall: ").append(this.getOverall() + "\n");
 
         return super.toString() + sb.toString();
     }

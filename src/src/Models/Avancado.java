@@ -33,13 +33,16 @@ public class Avancado extends Futebolista {
     }
 
     public int getOverall() {
-        return this.drible;
+        int overall = (int) (0.2*this.getRemate() + 0.18*this.getCabeceamento() + 0.16*this.getVelocidade() + 0.14*this.getResistencia() + 0.12*this.getImpulsao() + 0.10*this.getDestreza() + 0.10*this.getPasse());
+
+        return (int) (overall*0.80 + this.getDrible()*0.20);
     }
 
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
         sb.append("Drible: ").append(this.drible + "\n");
+        sb.append("Overall: ").append(this.getOverall() + "\n");
 
         return super.toString() + sb.toString();
     }
