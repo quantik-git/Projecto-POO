@@ -6,12 +6,12 @@ import java.util.List;
 public class Defesa extends Futebolista {
     private int roubo_de_bola;
 
-    public Defesa(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int roubo_de_bola) {
+    public Defesa( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int roubo_de_bola) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.roubo_de_bola = roubo_de_bola;
     }
 
-    public Defesa(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int roubo_de_bola) {
+    public Defesa( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int roubo_de_bola) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.roubo_de_bola = roubo_de_bola;
     }

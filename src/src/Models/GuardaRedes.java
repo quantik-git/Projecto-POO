@@ -6,12 +6,12 @@ import java.util.List;
 public class GuardaRedes extends Futebolista {
     private int elasticidade;
 
-    public GuardaRedes(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int elasticidade) {
+    public GuardaRedes(String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int elasticidade) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.elasticidade = elasticidade;
     }
 
-    public GuardaRedes(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int elasticidade) {
+    public GuardaRedes(String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int elasticidade) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.elasticidade = elasticidade;
     }
@@ -51,8 +51,8 @@ public class GuardaRedes extends Futebolista {
     public String toStringNomeNum() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(this.getNome() + " - ");
-        sb.append(this.getNumero() + "\t");
+        sb.append(this.getNome()).append(" - ");
+        sb.append(this.getNumero()).append("\t");
         sb.append("Guarda-Redes\t");
         sb.append(this.getOverall());
 

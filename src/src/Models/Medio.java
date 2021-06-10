@@ -6,12 +6,12 @@ import java.util.List;
 public class Medio extends Futebolista {
     private int recuperacao;
 
-    public Medio(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int recuperacao) {
+    public Medio( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int recuperacao) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.recuperacao = recuperacao;
     }
 
-    public Medio(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int recuperacao) {
+    public Medio( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int recuperacao) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.recuperacao = recuperacao;
     }

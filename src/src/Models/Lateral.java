@@ -6,12 +6,12 @@ import java.util.List;
 public class Lateral extends Futebolista{
     private int cruzamento;
 
-    public Lateral(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int cruzamento) {
+    public Lateral( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int cruzamento) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.cruzamento = cruzamento;
     }
 
-    public Lateral(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int cruzamento) {
+    public Lateral( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int cruzamento) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.cruzamento = cruzamento;
     }

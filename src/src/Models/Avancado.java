@@ -5,12 +5,12 @@ import java.util.List;
 public class Avancado extends Futebolista {
     private int drible;
 
-    public Avancado(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int drible) {
+    public Avancado( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial, int drible) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, historial);
         this.drible = drible;
     }
 
-    public Avancado(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int drible) {
+    public Avancado( String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, int drible) {
         super(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe);
         this.drible = drible;
     }

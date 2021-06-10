@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 public abstract class Futebolista {
     private String nome;
-    private int numero;
+    private Integer numero;
     private int velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe;
     private List<String> historial;
 
-    public Futebolista(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial) {
+    public Futebolista(String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial) {
         this.nome = nome;
         this.numero = numero;
         this.velocidade = velocidade;
@@ -29,7 +29,7 @@ public abstract class Futebolista {
         this.historial = historial;
     }
 
-    public Futebolista(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe) {
+    public Futebolista(String nome, Integer numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe) {
         this.nome = nome;
         this.numero = numero;
         this.velocidade = velocidade;
@@ -66,7 +66,7 @@ public abstract class Futebolista {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -141,6 +141,7 @@ public abstract class Futebolista {
     public abstract Futebolista clone();
 
     public abstract int getOverall();
+
 
     public String toString() {
         StringBuilder sb = new StringBuilder();

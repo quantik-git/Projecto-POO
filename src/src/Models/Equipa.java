@@ -64,10 +64,17 @@ public class Equipa {
     public void addPlantel(Futebolista futebolista) {
         Futebolista novo = futebolista.clone();
         novo.addHistorial(this.nome);
+        novo.setNumero(
+                this.plantel.values().stream()
+                        .map(Futebolista::getNumero)
+                        .max(Comparator.naturalOrder())
+                        .orElse(0) + 1
+        );
         this.plantel.put(futebolista.getNome(), novo);
     }
 
     public void removePlantel(String nome) {
+        this.plantel.get(nome).setNumero(null);
         this.plantel.remove(nome);
 
         this.setTitulares(
@@ -112,6 +119,13 @@ public class Equipa {
     public void addSuplente(String suplente) {
         if (this.suplentes.size() < MAX_SUPLENTES) {
             this.suplentes.add(suplente);
+        }
+    }
+
+    public void replaceSuplente(String antigo, String novo) {
+        if (this.suplentes.contains(antigo)) {
+            this.suplentes.remove(antigo);
+            this.suplentes.add(novo);
         }
     }
 

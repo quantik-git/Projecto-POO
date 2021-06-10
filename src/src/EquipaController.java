@@ -50,12 +50,38 @@ public class EquipaController {
         }
     }
 
+    private static void trocarSuplente() {
+        Equipa equipa = mundo.getEquipa(mundo.getEquipaEscolhida());
+        String[] livres = equipa.getPlantel().keySet().stream()
+                .filter(jog -> !equipa.getSuplentes().contains(jog) && !equipa.getTitulares().contains(jog))
+                .toArray(String[]::new);
+        String[] suplentes = equipa.getSuplentes().toArray(String[]::new);
+
+        int livre = Menu.gerar(livres);
+        int suplente = Menu.gerar(suplentes);
+
+        equipa.replaceSuplente(suplentes[suplente - 1], livres[livre - 1]);
+    }
+
+    private static void trocarTitular() {
+        Equipa equipa = mundo.getEquipa(mundo.getEquipaEscolhida());
+        String[] livres = equipa.getPlantel().keySet().stream()
+                .filter(jog -> !equipa.getSuplentes().contains(jog) && !equipa.getTitulares().contains(jog))
+                .toArray(String[]::new);
+        String[] titulares = equipa.getTitulares().toArray(String[]::new);
+
+        int livre = Menu.gerar(livres);
+        int titular = Menu.gerar(titulares);
+
+        equipa.replaceTitular(titulares[titular - 1], livres[livre - 1]);
+    }
+
     public static void updateEquipa() {
         String[] options = {
                 "Vender Jogador",
                 "Comprar Jogador",
                 "Trocar Titular",
-                "Trocar Suplentes"
+                "Trocar Suplente"
         };
 
         int opt = Menu.gerar(options);
@@ -68,8 +94,10 @@ public class EquipaController {
                 contratarJogador();
                 break;
             case 3:
+                trocarTitular();
                 break;
             case 4:
+                trocarSuplente();
                 break;
         }
     }
