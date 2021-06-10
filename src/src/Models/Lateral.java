@@ -36,7 +36,7 @@ public class Lateral extends Futebolista{
 
     @Override
     public int getOverall() {
-        int overall = (int) (0.2*this.getVelocidade() + 0.18*this.getPasse() + 0.16*this.getImpulsao() + 0.14*this.getDestreza() + 0.12*this.getResistencia() + 0.10*this.getRemate() + 0.10*this.getCabeceamento());
+        int overall = (int) (0.2*this.getVelocidade() + 0.18*this.getPasse() + 0.16*this.getDestreza() + 0.14*this.getResistencia() + 0.12*this.getImpulsao() + 0.10*this.getRemate() + 0.10*this.getCabeceamento());
 
         return (int) (overall*0.80 + this.getCruzamento()*0.20);
     }
