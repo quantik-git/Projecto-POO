@@ -129,6 +129,61 @@ public class Equipa {
         }
     }
 
+    public int getOverall(){
+        int overall = 0;
+        //tática 1: (1 guarda redes, 4 defesas, 4 medios e 2 avancados)
+        //tática 2: (1 guarda-redes, 4 defesas, 3 medios e 3 avancados)
+        int guardaredes = 0, defesas = 0, medios = 0, avancados = 0, lateral = 0;
+
+
+        for (String nome : titulares) {
+            Futebolista jogador = this.plantel.get(nome);
+            if (jogador instanceof GuardaRedes){
+                guardaredes += 1;
+            }
+            else if(jogador instanceof Defesa){
+                defesas += 1;
+            }
+            else if(jogador instanceof Medio){
+                medios += 1;
+            }
+            else if(jogador instanceof Avancado){
+                avancados += 1;
+            }
+            else if(jogador instanceof Lateral){
+                lateral += 1;
+            }
+            overall += jogador.getOverall();
+        }
+
+        overall = (int) overall/11;
+
+        int t1gr = 1, t1d = 4, t1m = 4, t1a = 2, t1f = 0;
+        // TODO adicionar tatica 2
+        int t2gr = 1, t2d = 4, t2m = 3, t2a = 3;
+        int retirados = 0;
+
+        int total1 = 0;
+        if (t1gr - guardaredes < 0) total1 += t1gr - guardaredes;
+        if (t1d - defesas < 0) total1 += t1d - defesas;
+        t1m = t1m - medios;
+        if ( t1m <= 0) total1 += t1m;
+        else {
+            if(lateral <= t1m) t1m -= lateral;
+            else{
+                retirados += t1m;
+                t1m = 0;
+            }
+        }
+        t1a -= (lateral-retirados);
+        t1a = t1a - avancados;
+        if ( t1a < 0) total1 += t1a;
+
+        overall = (int) overall * ((11-total1)/11);
+
+        return overall;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
