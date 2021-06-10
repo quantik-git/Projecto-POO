@@ -159,4 +159,13 @@ public abstract class Futebolista {
 
         return sb.toString();
     }
+
+    public String toStringEsp() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.getNome() + " - ");
+        sb.append(this.getNumero() + "\t");
+
+        return sb.toString();
+    }
 }
