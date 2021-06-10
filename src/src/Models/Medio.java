@@ -48,15 +48,13 @@ public class Medio extends Futebolista {
         return super.toString() + sb.toString();
     }
 
-    public String toStringNomeNum() {
+    public String toStringEsp() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(this.getNome() + " - ");
-        sb.append(this.getNumero() + "\t");
         sb.append("Medio\t");
         sb.append(this.getOverall());
 
-        return sb.toString();
+        return super.toStringEsp() + sb.toString();
     }
 
     public static Medio parse(String input){
