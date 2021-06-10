@@ -12,11 +12,13 @@ import java.util.ArrayList;
 
 public abstract class Futebolista {
     private String nome;
+    private int numero;
     private int velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe;
     private List<String> historial;
 
-    public Futebolista(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial) {
+    public Futebolista(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe, List<String> historial) {
         this.nome = nome;
+        this.numero = numero;
         this.velocidade = velocidade;
         this.resistencia = resistencia;
         this.destreza = destreza;
@@ -27,8 +29,9 @@ public abstract class Futebolista {
         this.historial = historial;
     }
 
-    public Futebolista(String nome, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe) {
+    public Futebolista(String nome, int numero, int velocidade, int resistencia, int destreza, int impulsao, int cabeceamento, int remate, int passe) {
         this.nome = nome;
+        this.numero = numero;
         this.velocidade = velocidade;
         this.resistencia = resistencia;
         this.destreza = destreza;
@@ -41,6 +44,7 @@ public abstract class Futebolista {
 
     public Futebolista(Futebolista f) {
         this.nome = f.getNome();
+        this.numero = f.getNumero();
         this.velocidade = f.getVelocidade();
         this.resistencia = f.getResistencia();
         this.destreza = f.getDestreza();
@@ -56,6 +60,14 @@ public abstract class Futebolista {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public int getVelocidade() {
@@ -134,6 +146,7 @@ public abstract class Futebolista {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Nome: ").append(this.nome + "\n");
+        sb.append("Numero: ").append(this.numero + "\n");
         sb.append("Velocidade: ").append(this.velocidade + "\n");
         sb.append("Resistencia: ").append(this.resistencia + "\n");
         sb.append("Destreza: ").append(this.destreza + "\n");

@@ -45,11 +45,11 @@ public class FutebolistaController {
         switch (tipodejogador) {
             case 1:
                 int elasticidade = GuardaRedesController.create();
-                jogador = new GuardaRedes(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
+                jogador = new GuardaRedes(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
                 break;
             case 2:
                 int roubo_de_bola = DefesaController.create();
-                jogador = new Defesa(nome, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
+                jogador = new Defesa(nome, numero, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
                 break;
             case 3:
                 int cruzamento = LateralController.create();
