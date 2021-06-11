@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.List;
+import java.util.Random;
 
 public class Avancado extends Futebolista {
     private int drible;
@@ -60,6 +61,9 @@ public class Avancado extends Futebolista {
     public static Avancado parse(String input) {
         String[] campos = input.split(",");
 
+        Random rand = new Random();
+        int valorHabEsp = 1 + rand.nextInt(100);
+
         return new Avancado(campos[0], Integer.parseInt(campos[1]),
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
@@ -68,6 +72,6 @@ public class Avancado extends Futebolista {
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
-                100);
+                valorHabEsp);
     }
 }
