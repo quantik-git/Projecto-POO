@@ -129,6 +129,68 @@ public class Equipa {
         }
     }
 
+    private int jogadoresSobram(int tgr, int td, int tm, int ta, int guardaredes, int defesas, int medios, int avancados, int lateral){
+        int retirados = 0;
+        int total = 0;
+
+        if (tgr - guardaredes < 0) total += tgr - guardaredes;
+        if (td - defesas < 0) total += td - defesas;
+
+        tm = tm - medios;
+        if ( tm <= 0) total += tm;
+        else if(lateral > tm){
+            retirados += tm;
+        }
+        ta -= (lateral-retirados);
+        ta = ta - avancados;
+        if ( ta < 0) total += ta;
+
+        return total;
+    }
+
+    public int getOverall(){
+        int overall = 0;
+        int guardaredes = 0, defesas = 0, medios = 0, avancados = 0, lateral = 0;
+
+        for (String nome : titulares) {
+            Futebolista jogador = this.plantel.get(nome);
+            if (jogador instanceof GuardaRedes){
+                guardaredes += 1;
+            }
+            else if(jogador instanceof Defesa){
+                defesas += 1;
+            }
+            else if(jogador instanceof Medio){
+                medios += 1;
+            }
+            else if(jogador instanceof Avancado){
+                avancados += 1;
+            }
+            else if(jogador instanceof Lateral){
+                lateral += 1;
+            }
+            overall += jogador.getOverall();
+        }
+
+        overall = overall/11;
+
+        //Tática 1: (1 guarda redes, 4 defesas, 4 medios e 2 avancados)
+        int t1gr = 1, t1d = 4, t1m = 4, t1a = 2;
+        int t1 = jogadoresSobram(t1gr, t1d, t1m, t1a, guardaredes, defesas, medios, avancados, lateral);
+
+        // Tática 2: (1 guarda-redes, 4 defesas, 3 medios e 3 avancados)
+        int t2gr = 1, t2d = 4, t2m = 3, t2a = 3;
+        int t2 = jogadoresSobram(t2gr, t2d, t2m, t2a, guardaredes, defesas, medios, avancados, lateral);
+
+        if(t1<t2){
+            t1 = t2;
+        }
+
+        overall = overall * ((11+t1)/11);
+
+        return overall;
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
@@ -139,6 +201,7 @@ public class Equipa {
         }
         sb.append("Titulares: ").append(this.titulares + "\n");
         sb.append("Suplentes: ").append(this.suplentes + "\n");
+        sb.append("Overall: ").append(this.getOverall());
 
         return sb.toString();
     }
