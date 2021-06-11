@@ -146,7 +146,6 @@ public class Equipa {
         if ( ta < 0) total += ta;
 
         return total;
-
     }
 
     public int getOverall(){
@@ -199,6 +198,7 @@ public class Equipa {
         sb.append("Plantel: ").append(this.plantel + "\n");
         sb.append("Titulares: ").append(this.titulares + "\n");
         sb.append("Suplentes: ").append(this.suplentes + "\n");
+        sb.append("Overall: ").append(this.getOverall());
 
         return sb.toString();
     }
