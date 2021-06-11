@@ -42,6 +42,7 @@ public class GuardaRedes extends Futebolista {
     public String toString() {
         StringBuilder sb= new StringBuilder();
 
+        sb.append("Posicao: Guarda-Redes\n");
         sb.append("Elasticidade: ").append(this.elasticidade + "\n");
         sb.append("Overall: ").append(this.getOverall() + "\n");
 
