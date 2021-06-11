@@ -1,7 +1,7 @@
 package Models;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Random;
 
 public class Defesa extends Futebolista {
     private int roubo_de_bola;
@@ -61,6 +61,9 @@ public class Defesa extends Futebolista {
     public static Defesa parse(String input){
         String[] campos = input.split(",");
 
+        Random rand = new Random();
+        int valorHabEsp = 1 + rand.nextInt(100);
+
         return new Defesa(campos[0], Integer.parseInt(campos[1]),
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
@@ -69,6 +72,6 @@ public class Defesa extends Futebolista {
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
-                80);
+                valorHabEsp);
     }
 }
