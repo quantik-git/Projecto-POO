@@ -141,11 +141,4 @@ public class EquipaController {
 
         show(equipas[escolha - 1]);
     }
-
-    public void transferir(String vendedor, String comprador, String nome) {
-        Equipa ant = mundo.getEquipa(vendedor);
-        Equipa prox = mundo.getEquipa(comprador);
-
-
-    }
 }

@@ -1,3 +1,4 @@
+import Exceptions.LinhaIncorretaException;
 import Models.*;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public class Parser {
 
-    public static void parse() throws IOException {
+    public static void parse() throws LinhaIncorretaException {
         Mundo mundo = Mundo.getInstance();
         boolean debug = false;
         String ficheiro = "./src/configs/inicializacao.txt";
@@ -37,31 +38,31 @@ public class Parser {
                 case "Guarda-Redes":
                     f = GuardaRedes.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
+                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Defesa":
                     f = Defesa.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
+                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Medio":
                     f = Medio.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
+                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Lateral":
                     f = Lateral.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
+                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Avancado":
                     f = Avancado.parse(linhaPartida[1]);
                     futebolistas.add(f);
-                    if (ultima == null) throw new IOException(); //we need to insert the player into the team
+                    if (ultima == null) throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.addPlantel(f.clone()); //if no team was parsed previously, file is not well-formed
                     break;
                 case "Jogo":
@@ -69,7 +70,7 @@ public class Parser {
                     jogos.add(j);
                     break;
                 default:
-                    throw new IOException();
+                    throw new LinhaIncorretaException();
             }
         }
 
