@@ -133,7 +133,10 @@ public class Equipa {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Nome: ").append(this.nome + "\n");
-        sb.append("Plantel: ").append(this.plantel + "\n");
+        sb.append("Plantel: \n");
+        for (Futebolista futebolista : plantel.values()) {
+            sb.append(futebolista.toStringEsp()).append("\n");
+        }
         sb.append("Titulares: ").append(this.titulares + "\n");
         sb.append("Suplentes: ").append(this.suplentes + "\n");
 

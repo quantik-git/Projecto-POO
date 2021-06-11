@@ -3,8 +3,7 @@ public class Main {
     public static void main(String[] args) {
         String[] options = {
                 "Novo Campeonato",
-                "Carregar Campeonato",
-                "Criar Campeonato"
+                "Carregar Campeonato"
         };
 
         while (true) {
@@ -15,18 +14,11 @@ public class Main {
                     System.exit(0);
                     break;
                 case 1:
-                    //jogar
                     Controller.novoJogo();
-
                     break;
                 case 2:
                     //load game
                     break;
-                case 3:
-
-                    break;
-                default:
-                    System.out.println("Comando não reconhecido");
             }
         }
     }

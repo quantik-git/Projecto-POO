@@ -1,12 +1,17 @@
 import Models.Equipa;
+import Models.Futebolista;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Controller {
 
     public static void novoJogo() {
         Mundo mundo = Mundo.getInstance();
-        String[] equipas;
+        ArrayList<String> equipas;
         int equipaEscolhida;
 
         // inicializar os dados predefinidos do jogo
@@ -17,14 +22,33 @@ public class Controller {
         }
 
         // escolher a equipa com que quer jogar
-        equipas = mundo.getEquipas().keySet().toArray(String[]::new);
-        equipaEscolhida = Menu.gerar(equipas) - 1;
+        equipas = new ArrayList<>(mundo.getEquipas().keySet());
+        equipas.add("Nova Equipa");
 
-        if (equipaEscolhida == -1) {
-            return;
+        equipaEscolhida = Menu.gerar(equipas.toArray(String[]::new)) - 1;
+
+        if (equipaEscolhida == -1) return;
+
+        if (equipaEscolhida == equipas.size() - 1) {
+            // criar nova equipa
+            String nome = Form.inputLine("Insira o nome da nova equipa: ");
+
+            for (int i = 0; i < 20; i++) {
+                // create plantel
+                FutebolistaController.create();
+            }
+
+            Equipa nova = EquipaController.create(nome);
+            nova.setPlantel(
+                    mundo.getFutebolistasLivres().stream().collect(
+                            Collectors.toMap(Futebolista::getNome, fut -> fut)
+                    )
+            );
+
+            mundo.setEquipaEscolhida(nome);
+        } else {
+            mundo.setEquipaEscolhida(equipas.get(equipaEscolhida));
         }
-
-        mundo.setEquipaEscolhida(equipas[equipaEscolhida]);
 
         // escolher os jogadores que quer como titulares / suplentes
         EquipaController.definirTitulares(mundo.getEquipaEscolhida());
@@ -38,50 +62,30 @@ public class Controller {
     // assume que o jogo já foi inicializado
     public static void jogar() {
         int opt;
+        Map<Integer, Runnable> commands = new HashMap<>();
         String[] options = {
                 "Simular jogo",
                 "Classificações",
                 "Alterar Equipa",
                 "Guardar Progresso",
-                "Criar Jogador"
+                "Criar Jogador",
+                "Consultar Jogador",
+                "Consultar Equipas"
         };
+
+        commands.put(0, () -> {});
+        commands.put(1, () -> {});
+        commands.put(2, () -> {});
+        commands.put(3, EquipaController::updateEquipa);
+        commands.put(4, () -> {});
+        commands.put(5, FutebolistaController::create);
+        commands.put(6, FutebolistaController::consultarJogador);
+        commands.put(7, EquipaController::consultarEquipa);
 
         do {
             opt = Menu.gerar(options);
 
-            switch (opt) {
-                case 1:
-                    // Simular o jogo
-                    break;
-                case 2:
-                    // Classificações
-                    break;
-                case 3:
-                    // Alterar Equipa
-                    EquipaController.updateEquipa();
-                    break;
-                case 4:
-                    // Guardar Progresso
-                    break;
-                case 5:
-                    // Criar Jogador
-                    FutebolistaController.create();
-                    break;
-            }
+            commands.get(opt).run();
         } while (opt != 0);
     }
-
-    public void menu() {
-        System.out.println("O que pretende fazer?\n" +
-                "1) Criar jogador" +
-                "2) Criar Equipa" +
-                "3) Associar jogador a uma equipa" +
-                "4) Consultar os jogadores" +
-                "5) Consultar as equipas" +
-                "6) Mostrar um jogador" +
-                "7) Mostrar uma equipa" +
-                "8) Mudar um jogador de equipa");
-
-    }
-
 }

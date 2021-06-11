@@ -62,7 +62,7 @@ public abstract class Futebolista {
         this.nome = nome;
     }
 
-    public int getNumero() {
+    public Integer getNumero() {
         return numero;
     }
 
@@ -142,7 +142,6 @@ public abstract class Futebolista {
 
     public abstract int getOverall();
 
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
@@ -161,11 +160,6 @@ public abstract class Futebolista {
     }
 
     public String toStringEsp() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(this.getNome() + " - ");
-        sb.append(this.getNumero() + "\t");
-
-        return sb.toString();
+        return String.format("%-55s - %5d\t", this.getNome(), this.getNumero());
     }
 }

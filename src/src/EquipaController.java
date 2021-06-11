@@ -2,7 +2,6 @@ import Models.Equipa;
 import Models.Futebolista;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EquipaController {
@@ -18,7 +17,7 @@ public class EquipaController {
         System.out.println(escolhido.toString());
     }
 
-    public Equipa create(String nome) {
+    public static Equipa create(String nome) {
         return new Equipa(nome);
     }
     
@@ -134,6 +133,13 @@ public class EquipaController {
         if (escolha == 0) return;
 
         mundo.getEquipa(mundo.getEquipaEscolhida()).addPlantel(livres.get(escolha - 1));
+    }
+
+    public static void consultarEquipa() {
+        String[] equipas = mundo.getEquipas().keySet().toArray(String[]::new);
+        int escolha = Menu.gerar(equipas);
+
+        show(equipas[escolha - 1]);
     }
 
     public void transferir(String vendedor, String comprador, String nome) {

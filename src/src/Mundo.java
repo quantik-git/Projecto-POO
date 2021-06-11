@@ -3,6 +3,7 @@ import Models.Futebolista;
 import Models.Jogo;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Mundo {
     private static Mundo instance = new Mundo();
@@ -66,6 +67,17 @@ public class Mundo {
 
     public void setEquipaEscolhida(String equipaEscolhida) {
         this.equipaEscolhida = equipaEscolhida;
+    }
+
+    public List<Futebolista> getFutebolistasLivres() {
+        ArrayList<String> contratados = new ArrayList<>();
+        this.equipas.values().forEach(
+                equipa -> contratados.addAll(equipa.getPlantel().keySet())
+        );
+
+        return this.getFutebolistas().stream()
+                .filter(j -> !contratados.contains(j.getNome()))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public static Mundo getInstance(){

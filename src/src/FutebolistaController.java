@@ -1,26 +1,25 @@
 import Models.*;
 
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
+
 public class FutebolistaController {
     private static Mundo mundo = Mundo.getInstance();
 
-    public void index() {
-        for (Futebolista futebolista : mundo.getFutebolistas()) {
-            show(futebolista.getNome());
-        }
-    }
+    public static void consultarJogador() {
+        int escolha = Menu.gerar(mundo.getFutebolistas().stream().map(Futebolista::toStringEsp).toArray(String[]::new));
 
-    public void show(String nome) {
-        Futebolista escolhido = mundo.getFutebolista(nome);
-
-        System.out.println(escolhido.toString());
+        show(mundo.getFutebolistas().get(escolha - 1));
     }
 
     public static void show(Futebolista escolhido) {
         System.out.println(escolhido.toString());
     }
 
-    public static void create(){
+    public static void create() {
         // TODO menu tem opção de sair que não devia ser possivel
+        ArrayList<Callable<Futebolista>> commands = new ArrayList<>();
+        Futebolista jogador = null;
         String[] options = {
                 "Guarda-Redes",
                 "Defesa",
@@ -39,34 +38,23 @@ public class FutebolistaController {
         int cabeceamento = Form.inputInt("Insira o cabeceamento do jogador: ", 0, 100);
         int remate = Form.inputInt("Insira o remate do jogador: ", 0, 100);
         int passe = Form.inputInt("Insira o passe do jogador: ", 0, 100);
+        int especial = Form.inputInt("Insira o atributo especial do jogador: ", 0, 100);
 
-        Futebolista jogador = null;
+        commands.add(() -> null);
+        commands.add(() -> new GuardaRedes(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, especial));
+        commands.add(() -> new Defesa(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, especial));
+        commands.add(() -> new Lateral(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, especial));
+        commands.add(() -> new Medio(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, especial));
+        commands.add(() -> new Avancado(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, especial));
 
-        switch (tipodejogador) {
-            case 1:
-                int elasticidade = GuardaRedesController.create();
-                jogador = new GuardaRedes(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, elasticidade);
-                break;
-            case 2:
-                int roubo_de_bola = DefesaController.create();
-                jogador = new Defesa(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, roubo_de_bola);
-                break;
-            case 3:
-                int cruzamento = LateralController.create();
-                jogador = new Lateral(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, cruzamento);
-                break;
-            case 4:
-                int recuperacao = MedioController.create();
-                jogador = new Medio(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, recuperacao);
-                break;
-            case 5:
-                int drible = AvancadoController.create();
-                jogador = new Avancado(nome, null, velocidade, resistencia, destreza, impulsao, cabeceamento, remate, passe, drible);
-                break;
-        }
+        try {
+            jogador = commands.get(tipodejogador).call();
+        } catch (Exception ignored) {}
+
+        // caso escolham sair
+        if (jogador == null) return;
 
         show(jogador);
-
         mundo.addFutebolista(jogador);
     }
 }
