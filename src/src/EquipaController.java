@@ -2,6 +2,7 @@ import Models.Equipa;
 import Models.Futebolista;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EquipaController {
@@ -25,13 +26,20 @@ public class EquipaController {
         Equipa equipa = mundo.getEquipa(nome);
 
         for (int i = 0; i < Equipa.NUM_TITULARES; i++) {
-            String[] options = equipa.getPlantel().keySet().stream()
-                    .filter(n -> !equipa.getTitulares().contains(n) && !equipa.getSuplentes().contains(n))
+            ArrayList<Futebolista> futebolistas = (ArrayList<Futebolista>) equipa.getPlantel().entrySet().stream()
+                    .filter(n -> !equipa.getTitulares().contains(n.getKey()) && !equipa.getSuplentes().contains(n.getKey()))
+                    .map(Map.Entry::getValue)
+                    .collect(Collectors.toList());
+
+            String[] options = futebolistas.stream()
+                    .map(Futebolista::toStringEsp)
                     .toArray(String[]::new);
+
             int escolha = Menu.gerar(options);
 
-            // TODO podem escolher sair no menu e estourar isto
-            equipa.addTitular(options[escolha - 1]);
+            if (escolha == 0) return;
+
+            equipa.addTitular(futebolistas.get(escolha - 1).getNome());
         }
     }
 
