@@ -1,6 +1,7 @@
 import Models.Equipa;
 import Models.Jogo;
 import Models.Mundo;
+import Views.Menu;
 
 import java.util.concurrent.TimeUnit;
 import java.util.Random;
@@ -26,10 +27,10 @@ public class JogoController {
         };
 
         if (participantes[0].getTitulares().size() < Equipa.NUM_TITULARES)
-            EquipaController.definirTitulares(participantes[0].getNome());
+            if (!EquipaController.definirTitulares(participantes[0].getNome())) return;
 
         if (participantes[0].getSuplentes().size() < Equipa.MIN_SUPLENTES)
-            EquipaController.definirSuplentes(participantes[0].getNome());
+            if (!EquipaController.definirSuplentes(participantes[0].getNome())) return;
 
         jogo = new Jogo(participantes[1].getNome(), participantes[0].getNome());
 

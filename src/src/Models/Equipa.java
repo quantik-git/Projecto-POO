@@ -3,9 +3,6 @@ package Models;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Habilidade global em falta
- */
 public class Equipa {
     public static final int NUM_TITULARES = 11;
     public static final int MAX_SUPLENTES = 12;

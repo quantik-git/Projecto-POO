@@ -1,4 +1,6 @@
 import Models.*;
+import Views.Form;
+import Views.Menu;
 
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
@@ -16,7 +18,7 @@ public class FutebolistaController {
         System.out.println(escolhido.toString());
     }
 
-    public static void create() {
+    public static Futebolista create() {
         ArrayList<Callable<Futebolista>> commands = new ArrayList<>();
         Futebolista jogador = null;
         String[] options = {
@@ -29,7 +31,7 @@ public class FutebolistaController {
 
         int tipodejogador = Menu.gerar(options);
 
-        if (tipodejogador == 0) return;
+        if (tipodejogador == 0) return null;
 
         String nome = Form.inputLine("Insira o nome do jogador: ");
         int velocidade = Form.inputInt("Insira a velocidade do jogador: ", 0, 100);
@@ -53,9 +55,11 @@ public class FutebolistaController {
         } catch (Exception ignored) {}
 
         // caso escolham sair
-        if (jogador == null) return;
+        if (jogador == null) return null;
 
         show(jogador);
         mundo.addFutebolista(jogador);
+
+        return jogador;
     }
 }

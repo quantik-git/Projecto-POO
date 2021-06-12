@@ -1,50 +1,42 @@
 import Models.Equipa;
 import Models.Futebolista;
 import Models.Mundo;
+import Views.Form;
+import Views.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CampeonatoController {
     private static Mundo mundo = Mundo.getInstance();
 
     public static void novoCampeonato() {
-        ArrayList<String> equipas;
-        int equipaEscolhida;
-
-        // escolher a equipa com que quer jogar
-        equipas = new ArrayList<>(mundo.getEquipas().keySet());
+        ArrayList<String> equipas = new ArrayList<>(mundo.getEquipas().keySet());
         equipas.add("Nova Equipa");
-
-        equipaEscolhida = Menu.gerar(equipas.toArray(String[]::new));
+        int equipaEscolhida = Menu.gerar(equipas.toArray(String[]::new));
 
         if (equipaEscolhida == 0) {
             return;
         } else if (equipaEscolhida == equipas.size()) {
-            // criar nova equipa
             String nome = Form.inputLine("Insira o nome da nova equipa: ");
+            Equipa nova = EquipaController.create(nome);
 
             // create plantel
             for (int i = 0; i < 20; i++) {
-                FutebolistaController.create();
+                Futebolista futebolista = FutebolistaController.create();
+                if (futebolista == null) return;
+                nova.addPlantel(futebolista);
             }
 
-            Equipa nova = EquipaController.create(nome);
-            nova.setPlantel(
-                    mundo.getFutebolistasLivres().stream().collect(
-                            Collectors.toMap(Futebolista::getNome, fut -> fut)
-                    )
-            );
-
-            equipas.set(equipaEscolhida, nome);
-        } else {
-            mundo.setEquipaEscolhida(equipas.get(equipaEscolhida - 1));
+            mundo.addEquipa(nova);
+            equipas.set(equipaEscolhida - 1, nome);
         }
 
+        mundo.setEquipaEscolhida(equipas.get(equipaEscolhida - 1));
+
         // escolher os jogadores que quer como titulares / suplentes
-        EquipaController.definirTitulares(mundo.getEquipaEscolhida());
-        EquipaController.definirSuplentes(mundo.getEquipaEscolhida());
+        if (!EquipaController.definirTitulares(mundo.getEquipaEscolhida())) return;
+        if (!EquipaController.definirSuplentes(mundo.getEquipaEscolhida())) return;
 
         EquipaController.show(mundo.getEquipaEscolhida());
 

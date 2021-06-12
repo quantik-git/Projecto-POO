@@ -1,5 +1,7 @@
 import Exceptions.LinhaIncorretaException;
 import Models.*;
+import Views.Form;
+import Views.Menu;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -1,6 +1,7 @@
 import Models.Equipa;
 import Models.Futebolista;
 import Models.Mundo;
+import Views.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class EquipaController {
         return new Equipa(nome);
     }
     
-    public static void definirTitulares(String nome) {
+    public static boolean definirTitulares(String nome) {
         Equipa equipa = mundo.getEquipa(nome);
 
         for (int i = 0; i < Equipa.NUM_TITULARES; i++) {
@@ -39,13 +40,14 @@ public class EquipaController {
 
             int escolha = Menu.gerar(options);
 
-            if (escolha == 0) return;
+            if (escolha == 0) return false;
 
             equipa.addTitular(futebolistas.get(escolha - 1).getNome());
         }
+        return true;
     }
 
-    public static void definirSuplentes(String nome) {
+    public static boolean definirSuplentes(String nome) {
         Equipa equipa = mundo.getEquipa(nome);
 
         for (int i = 0; i < Equipa.MIN_SUPLENTES; i++) {
@@ -60,10 +62,11 @@ public class EquipaController {
 
             int escolha = Menu.gerar(options);
 
-            if (escolha == 0) return;
+            if (escolha == 0) return false;
 
             equipa.addSuplente(futebolistas.get(escolha - 1).getNome());
         }
+        return true;
     }
 
     private static void trocarSuplente() {

@@ -30,6 +30,10 @@ public class Mundo {
         this.equipas = equipas;
     }
 
+    public void addEquipa(Equipa nova) {
+        this.equipas.put(nova.getNome(), nova);
+    }
+
     public List<Futebolista> getFutebolistas() {
         return futebolistas;
     }
@@ -85,4 +89,6 @@ public class Mundo {
     public static Mundo getInstance(){
         return instance;
     }
+
+
 }
