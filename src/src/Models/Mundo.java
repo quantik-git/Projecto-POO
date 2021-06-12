@@ -1,6 +1,4 @@
-import Models.Equipa;
-import Models.Futebolista;
-import Models.Jogo;
+package Models;
 
 import java.util.*;
 import java.util.stream.Collectors;

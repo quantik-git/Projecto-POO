@@ -1,5 +1,6 @@
 import Models.Equipa;
 import Models.Jogo;
+import Models.Mundo;
 
 import java.util.concurrent.TimeUnit;
 import java.util.Random;
@@ -26,7 +27,7 @@ public class JogoController {
         if (participantes[0].getTitulares().size() < Equipa.NUM_TITULARES)
             EquipaController.definirTitulares(participantes[0].getNome());
 
-        if (participantes[0].getTitulares().size() < Equipa.MIN_SUPLENTES)
+        if (participantes[0].getSuplentes().size() < Equipa.MIN_SUPLENTES)
             EquipaController.definirSuplentes(participantes[0].getNome());
 
         jogo = new Jogo(participantes[1].getNome(), participantes[0].getNome());
