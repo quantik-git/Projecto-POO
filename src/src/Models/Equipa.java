@@ -94,7 +94,6 @@ public class Equipa {
         titulares.forEach(this::addTitular);
     }
 
-    //Decidir se vamos Throw Exception para sinalizar se foi possível adicionar o jogador TODO
     public void addTitular(String nome) {
         if (this.titulares.size() < NUM_TITULARES) {
             this.titulares.add(nome);
@@ -129,21 +128,23 @@ public class Equipa {
         }
     }
 
-    private int jogadoresSobram(int tgr, int td, int tm, int ta, int guardaredes, int defesas, int medios, int avancados, int lateral){
+    private int getCompatibilidadeTatica(int[] tatica, Map<Class<? extends Futebolista>, Integer> contar){
+        int lateralAux = contar.get(Lateral.class);
         int total = 0;
 
-        if (tgr - guardaredes < 0) total += tgr - guardaredes;
-        if (td - defesas < 0) total += td - defesas;
+        tatica[0] -= contar.get(GuardaRedes.class);
+        tatica[1] -= contar.get(Defesa.class);
+        tatica[2] -= contar.get(Medio.class);
+        tatica[3] -= contar.get(Avancado.class);
 
-        if (tm - medios < 0)
-            total += tm - medios;
-        else if (tm - (medios + lateral) < 0) {
-            int aux = tm - (medios + lateral);
-            lateral += aux;
-        }
+        if (tatica[0] < 0) total += tatica[0];
+        if (tatica[1] < 0) total += tatica[1];
 
-        if (ta - (avancados + lateral) < 0)
-            total += ta - (avancados + lateral);
+        if (tatica[2] < 0) total += tatica[2];
+        else lateralAux -= tatica[2];
+
+        tatica[3] -= lateralAux;
+        if (tatica[3] < 0) total += tatica[3];
 
         return total;
     }
@@ -151,7 +152,7 @@ public class Equipa {
     public int getOverall(){
         int overall = 0;
         int maxTatica = Integer.MIN_VALUE;
-        Map<Class<?>, Integer> contar = new HashMap<>();
+        Map<Class<? extends Futebolista>, Integer> contar = new HashMap<>();
         int[][] taticas = {
                 {1, 4, 4, 2},
                 {1, 4, 3, 3}
@@ -169,17 +170,13 @@ public class Equipa {
             overall += jogador.getOverall();
         }
 
-        overall /= NUM_TITULARES;
-
         for (int[] tatica : taticas) {
-            int aux = jogadoresSobram(
-                    tatica[0], tatica[1], tatica[2], tatica[3], contar.get(GuardaRedes.class), contar.get(Defesa.class),
-                    contar.get(Medio.class), contar.get(Avancado.class), contar.get(Lateral.class)
-            );
-            if (aux > maxTatica) maxTatica = aux;
+            int compatibilidadeTatica = getCompatibilidadeTatica(tatica, contar);
+            if (compatibilidadeTatica > maxTatica) maxTatica = compatibilidadeTatica;
         }
 
-        overall = (int) (overall * ((float) (11 + maxTatica) / (float) 11));
+        overall /= NUM_TITULARES; // avg overall
+        overall = (int) (overall * ((float) (11 + maxTatica) / (float) 11)); // fator tático
 
         return overall;
     }
@@ -197,5 +194,9 @@ public class Equipa {
         sb.append("Overall: ").append(this.getOverall()).append("\n");
 
         return sb.toString();
+    }
+
+    public String write() {
+        return "Equipa:" + this.nome + "\n";
     }
 }

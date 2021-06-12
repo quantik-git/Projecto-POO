@@ -1,6 +1,8 @@
 import Exceptions.LinhaIncorretaException;
 import Models.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,24 +12,78 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Parser {
+public class SaveLoadController {
+    private static Mundo mundo = Mundo.getInstance();
 
-    public static void parse() throws LinhaIncorretaException {
-        Mundo mundo = Mundo.getInstance();
+    public static void loadDefault() {
+        try {
+            parse("./src/configs/inicializacao.txt");
+        } catch (LinhaIncorretaException e) {
+            e.printStackTrace(); // TODO dizer que o ficheiro está mal construído
+        }
+
+        CampeonatoController.novoCampeonato();
+    }
+
+    public static void load() {
+        File f = new File("./src/saves/");
+        String[] pathnames = f.list();
+
+        if (pathnames == null) return;
+
+        int opt = Menu.gerar(pathnames);
+        if (opt == 0) return;
+
+        try {
+            parse("./src/saves/" + pathnames[opt - 1]);
+        } catch (LinhaIncorretaException e) {
+            e.printStackTrace(); // TODO dizer que o ficheiro está mal construído
+        }
+
+        CampeonatoController.novoCampeonato();
+    }
+
+    public static void save() {
+        String filename = Form.inputLine("Nome do ficheiro: ");
+
+        try {
+            write("./src/saves/" + filename + ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void write(String ficheiro) throws IOException {
+        FileOutputStream outputStream = new FileOutputStream(ficheiro, false);
+        StringBuilder str = new StringBuilder();
+
+        for (Equipa equipa : mundo.getEquipas().values()) {
+            str.append(equipa.write());
+            for (Futebolista futebolista : equipa.getPlantel().values()) {
+                str.append(futebolista.write());
+            }
+        }
+
+        for (Jogo jogo : mundo.getJogos()) {
+            str.append(jogo.write());
+        }
+
+        outputStream.write(str.toString().getBytes());
+        outputStream.close();
+    }
+
+    public static void parse(String ficheiro) throws LinhaIncorretaException {
         boolean debug = false;
-        String ficheiro = "./src/configs/inicializacao.txt";
-
-        List<String> linhas = lerFicheiro(ficheiro);
         Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         List<Futebolista> futebolistas = new ArrayList<>(); //Futebolista
         List<Jogo> jogos = new ArrayList<>();
+        List<String> linhas = lerFicheiro(ficheiro);
 
         Equipa ultima = null;
         Futebolista f = null;
-        String[] linhaPartida;
 
         for (String linha : linhas) {
-            linhaPartida = linha.split(":", 2);
+            String[] linhaPartida = linha.split(":", 2);
 
             switch (linhaPartida[0]) {
                 case "Equipa":
@@ -76,6 +132,7 @@ public class Parser {
 
         mundo.setFutebolistas(futebolistas);
         mundo.setEquipas(equipas);
+        mundo.setJogos(jogos);
 
         if (debug) {
             for (Equipa e: equipas.values()){

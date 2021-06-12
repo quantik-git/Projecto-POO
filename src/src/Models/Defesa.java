@@ -58,6 +58,22 @@ public class Defesa extends Futebolista {
         return super.toStringEsp() + sb.toString();
     }
 
+    public String write() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Defesa:")
+                .append(getNome()).append(",")
+                .append(getVelocidade()).append(",")
+                .append(getResistencia()).append(",")
+                .append(getDestreza()).append(",")
+                .append(getImpulsao()).append(",")
+                .append(getCabeceamento()).append(",")
+                .append(getRemate()).append(",")
+                .append(getPasse()).append("\n");
+
+        return sb.toString();
+    }
+
     public static Defesa parse(String input){
         String[] campos = input.split(",");
 
@@ -74,4 +90,6 @@ public class Defesa extends Futebolista {
                 Integer.parseInt(campos[8]),
                 valorHabEsp);
     }
+
+
 }

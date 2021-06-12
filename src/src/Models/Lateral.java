@@ -60,6 +60,23 @@ public class Lateral extends Futebolista{
         return super.toStringEsp() + sb.toString();
     }
 
+    public String write() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Lateral:")
+                .append(getNome()).append(",")
+                .append(getVelocidade()).append(",")
+                .append(getResistencia()).append(",")
+                .append(getDestreza()).append(",")
+                .append(getImpulsao()).append(",")
+                .append(getCabeceamento()).append(",")
+                .append(getRemate()).append(",")
+                .append(getPasse()).append(",")
+                .append(this.cruzamento).append("\n");
+
+        return sb.toString();
+    }
+
     public static Lateral parse(String input){
         String[] campos = input.split(",");
         return new Lateral(campos[0], Integer.parseInt(campos[1]),

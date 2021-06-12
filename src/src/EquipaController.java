@@ -2,6 +2,7 @@ import Models.Equipa;
 import Models.Futebolista;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -47,13 +48,20 @@ public class EquipaController {
         Equipa equipa = mundo.getEquipa(nome);
 
         for (int i = 0; i < Equipa.MIN_SUPLENTES; i++) {
-            String[] options = equipa.getPlantel().keySet().stream()
-                    .filter(n -> !equipa.getTitulares().contains(n) && !equipa.getSuplentes().contains(n))
+            ArrayList<Futebolista> futebolistas = (ArrayList<Futebolista>) equipa.getPlantel().entrySet().stream()
+                    .filter(n -> !equipa.getTitulares().contains(n.getKey()) && !equipa.getSuplentes().contains(n.getKey()))
+                    .map(Map.Entry::getValue)
+                    .collect(Collectors.toList());
+
+            String[] options = futebolistas.stream()
+                    .map(Futebolista::toStringEsp)
                     .toArray(String[]::new);
+
             int escolha = Menu.gerar(options);
 
-            // TODO podem escolher sair no menu e estourar isto
-            equipa.addSuplente(options[escolha - 1]);
+            if (escolha == 0) return;
+
+            equipa.addSuplente(futebolistas.get(escolha - 1).getNome());
         }
     }
 
@@ -84,6 +92,7 @@ public class EquipaController {
     }
 
     public static void updateEquipa() {
+        List<Runnable> commands = new ArrayList<>();
         String[] options = {
                 "Vender Jogador",
                 "Comprar Jogador",
@@ -93,20 +102,13 @@ public class EquipaController {
 
         int opt = Menu.gerar(options);
 
-        switch (opt) {
-            case 1:
-                venderJogador();
-                break;
-            case 2:
-                contratarJogador();
-                break;
-            case 3:
-                trocarTitular();
-                break;
-            case 4:
-                trocarSuplente();
-                break;
-        }
+        commands.add(0, () -> {});
+        commands.add(1, EquipaController::venderJogador);
+        commands.add(2, EquipaController::contratarJogador);
+        commands.add(3, EquipaController::trocarTitular);
+        commands.add(4, EquipaController::trocarSuplente);
+
+        commands.get(opt).run();
     }
 
     public static void venderJogador() {
@@ -133,8 +135,6 @@ public class EquipaController {
         ArrayList<Futebolista> livres = mundo.getFutebolistas().stream()
                 .filter(j -> !contratados.contains(j.getNome()))
                 .collect(Collectors.toCollection(ArrayList::new));
-
-        //livres.forEach(FutebolistaController::show);
 
         int escolha = Menu.gerar(livres.stream().map(Futebolista::getNome).toArray(String[]::new));
 

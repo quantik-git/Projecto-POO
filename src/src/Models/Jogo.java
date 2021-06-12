@@ -1,10 +1,8 @@
 package Models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Jogo {
     private String casa;
@@ -28,6 +26,18 @@ public class Jogo {
         this.jogadoresVisitante = jogadoresVisitante;
         this.substituicoesCasa = substituicoesCasa;
         this.substitucoesVisitante = substitucoesVisitante;
+    }
+
+    public Jogo(String casa, String visitante) {
+        this.casa = casa;
+        this.visitante = visitante;
+        this.golosCasa = 0;
+        this.golosVisitante = 0;
+        this.date = LocalDate.now();
+        this.jogadoresCasa = new ArrayList<>();
+        this.jogadoresVisitante = new ArrayList<>();
+        this.substituicoesCasa = new HashMap<>();
+        this.substitucoesVisitante = new HashMap<>();
     }
 
     public String getCasa() {
@@ -54,12 +64,20 @@ public class Jogo {
         this.golosCasa = golosCasa;
     }
 
+    public void addGolosCasa() {
+        this.golosCasa++;
+    }
+
     public int getGolosVisitante() {
         return golosVisitante;
     }
 
     public void setGolosVisitante(int golosVisitante) {
         this.golosVisitante = golosVisitante;
+    }
+
+    public void addGolosVisitante() {
+        this.golosVisitante++;
     }
 
     public LocalDate getDate() {
@@ -100,6 +118,41 @@ public class Jogo {
 
     public void setSubstitucoesVisitante(Map<Integer, Integer> substitucoesVisitante) {
         this.substitucoesVisitante = substitucoesVisitante;
+    }
+
+    public String toString() {
+        return "Jogo{" +
+                "casa='" + casa + '\'' +
+                ", visitante='" + visitante + '\'' +
+                ", golosCasa=" + golosCasa +
+                ", golosVisitante=" + golosVisitante +
+                ", date=" + date +
+                ", jogadoresCasa=" + jogadoresCasa +
+                ", jogadoresVisitante=" + jogadoresVisitante +
+                ", substituicoesCasa=" + substituicoesCasa +
+                ", substitucoesVisitante=" + substitucoesVisitante +
+                '}';
+    }
+
+    public String write() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Jogo:")
+                .append(this.casa).append(",")
+                .append(this.visitante).append(",")
+                .append(this.golosCasa).append(",")
+                .append(this.golosVisitante).append(",")
+                .append(this.date).append(",")
+                .append(this.jogadoresCasa.stream()
+                        .map(Object::toString).collect(Collectors.joining(","))).append(",")
+                .append(this.substituicoesCasa.entrySet().stream()
+                        .map(n -> n.getKey() + "->" + n.getValue()).collect(Collectors.joining(","))).append(",")
+                .append(this.jogadoresVisitante.stream()
+                        .map(Object::toString).collect(Collectors.joining(","))).append(",")
+                .append(this.substitucoesVisitante.entrySet().stream()
+                        .map(n -> n.getKey() + "->" + n.getValue()).collect(Collectors.joining(","))).append("\n");
+
+        return sb.toString();
     }
 
     public static Jogo parse(String input) {

@@ -162,4 +162,6 @@ public abstract class Futebolista {
     public String toStringEsp() {
         return String.format("%-55s - %5d\t", this.getNome(), this.getNumero());
     }
+
+    public abstract String write();
 }

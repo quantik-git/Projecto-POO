@@ -7,17 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CampeonatoController {
+    private static Mundo mundo = Mundo.getInstance();
+
     public static void novoCampeonato() {
-        Mundo mundo = Mundo.getInstance();
         ArrayList<String> equipas;
         int equipaEscolhida;
-
-        // inicializar os dados predefinidos do jogo
-        try {
-            Parser.parse();
-        } catch (LinhaIncorretaException e) {
-            e.printStackTrace();
-        }
 
         // escolher a equipa com que quer jogar
         equipas = new ArrayList<>(mundo.getEquipas().keySet());
@@ -63,22 +57,22 @@ public class CampeonatoController {
         List<Runnable> commands = new ArrayList<>();
         String[] options = {
                 "Simular jogo",
-                "Classificações",
+                "Consultar Jogos",
                 "Alterar Equipa",
-                "Guardar Progresso",
+                "Consultar Equipas",
                 "Criar Jogador",
-                "Consultar Jogador",
-                "Consultar Equipas"
+                "Consultar Jogadores",
+                "Guardar Progresso"
         };
 
         commands.add(0, () -> {});
-        commands.add(1, () -> {});
-        commands.add(2, () -> {});
+        commands.add(1, JogoController::simularJogo);
+        commands.add(2, JogoController::consultarJogo);
         commands.add(3, EquipaController::updateEquipa);
-        commands.add(4, () -> {});
+        commands.add(4, EquipaController::consultarEquipa);
         commands.add(5, FutebolistaController::create);
         commands.add(6, FutebolistaController::consultarJogador);
-        commands.add(7, EquipaController::consultarEquipa);
+        commands.add(7, SaveLoadController::save);
 
         do {
             opt = Menu.gerar(options);

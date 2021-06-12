@@ -11,8 +11,8 @@ public class Controller {
         };
 
         commands.add(0, () -> System.exit(0));
-        commands.add(1, CampeonatoController::novoCampeonato);
-        commands.add(2, () -> {});//load game
+        commands.add(1, SaveLoadController::loadDefault);
+        commands.add(2, SaveLoadController::load);
 
         while (true) {
             commands.get(

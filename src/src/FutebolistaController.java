@@ -17,7 +17,6 @@ public class FutebolistaController {
     }
 
     public static void create() {
-        // TODO menu tem opção de sair que não devia ser possivel
         ArrayList<Callable<Futebolista>> commands = new ArrayList<>();
         Futebolista jogador = null;
         String[] options = {
@@ -29,6 +28,8 @@ public class FutebolistaController {
         };
 
         int tipodejogador = Menu.gerar(options);
+
+        if (tipodejogador == 0) return;
 
         String nome = Form.inputLine("Insira o nome do jogador: ");
         int velocidade = Form.inputInt("Insira a velocidade do jogador: ", 0, 100);
