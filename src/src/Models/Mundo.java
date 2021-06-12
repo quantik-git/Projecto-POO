@@ -59,6 +59,10 @@ public class Mundo {
         this.jogos = jogos;
     }
 
+    public void addJogo(Jogo jogo) {
+        this.jogos.add(jogo);
+    }
+
     public String getEquipaEscolhida() {
         return equipaEscolhida;
     }

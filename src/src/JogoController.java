@@ -4,6 +4,7 @@ import Models.Mundo;
 
 import java.util.concurrent.TimeUnit;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class JogoController {
     private static Mundo mundo = Mundo.getInstance();
@@ -31,6 +32,17 @@ public class JogoController {
             EquipaController.definirSuplentes(participantes[0].getNome());
 
         jogo = new Jogo(participantes[1].getNome(), participantes[0].getNome());
+
+        jogo.setJogadoresCasa(
+                participantes[1].getTitulares().stream()
+                .map(n -> participantes[1].getPlantel().get(n).getNumero())
+                .collect(Collectors.toList())
+        );
+        jogo.setJogadoresVisitante(
+                participantes[0].getTitulares().stream()
+                        .map(n -> participantes[0].getPlantel().get(n).getNumero())
+                        .collect(Collectors.toList())
+        );
 
         System.out.println("Inicio do jogo");
         for (int i = 0; i < 18; i++) {
@@ -63,6 +75,8 @@ public class JogoController {
 
         System.out.println(jogo.getCasa() + "  -  " + jogo.getVisitante());
         System.out.println(jogo.getGolosCasa() + " - " + jogo.getGolosVisitante());
+
+        mundo.addJogo(jogo);
     }
 
     public static void consultarJogo() {
